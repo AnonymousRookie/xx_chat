@@ -1,0 +1,16 @@
+{
+    "server_for_client_conn": {
+        "listen_ip":"0.0.0.0", 
+        "port":8008
+    },
+
+    "server_for_http_client_conn": {
+        "listen_ip":"0.0.0.0", 
+        "port":8080
+    },
+
+    "server_for_msg_server_conn": {
+        "listen_ip":"0.0.0.0", 
+        "port":8100
+    }
+}

@@ -1,0 +1,47 @@
+syntax = "proto3";
+package im.login;
+import "im.base.proto";
+option optimize_for = LITE_RUNTIME;
+
+
+// service id: 0x0001
+
+message MsgServReq {
+    // cmd id: 0x0101
+}
+
+message MsgServRsp {
+    // cmd id: 0x0102
+    im.base.ResultType result_code = 1;
+    string ip = 2;
+    uint32 port = 3;
+}
+
+// 登录请求
+message LoginReq {
+    // cmd id: 0x0103
+    string userName = 1;
+    string passWord = 2;
+    im.base.UserStatType online_status = 3;
+}
+
+// 登录响应
+message LoginRes {
+    // cmd id: 0x0104
+    uint32 server_time = 1;
+    im.base.ResultType result_code = 2;
+    string result_string = 3;
+    im.base.UserStatType online_status = 4;
+    im.base.UserInfo user_info = 5;
+}
+
+// 登出请求
+message LogoutReq {
+    // cmd id: 0x0105
+}
+
+// 登出响应
+message LogoutRsp {
+    // cmd id: 0x0106
+    uint32 result_code = 1;
+}

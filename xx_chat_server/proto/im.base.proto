@@ -1,0 +1,73 @@
+syntax = "proto3";
+package im.base;
+option optimize_for = LITE_RUNTIME;
+
+// service id
+enum ServiceID {
+    SID_UNKNOW = 0x0000;
+    SID_LOGIN = 0x0001;       // for login
+    SID_FRIEND_LIST = 0x0003; // for friend list
+    SID_MSG = 0x0004;
+    SID_OTHER = 0x0007;
+}
+
+// command id for login
+enum LoginCmdID {
+    CID_LOGIN_UNKNOW = 0x0000;
+    CID_LOGIN_REQ_MSGSERVER = 0x0101;
+    CID_LOGIN_RES_MSGSERVER = 0x0102;
+    CID_LOGIN_REQ_USERLOGIN = 0x0103;
+    CID_LOGIN_RES_USERLOGIN = 0x0104;
+    CID_LOGIN_REQ_LOGINOUT = 0x0105;
+    CID_LOGIN_RES_LOGINOUT = 0x0106;
+}
+
+enum OtherCmdID {
+    CID_OTHER_UNKNOW = 0x0000;
+    CID_OTHER_HEARTBEAT = 0x0701;
+    CID_OTHER_LOGIN_VALIDATE_REQ = 0x0703;
+    CID_OTHER_LOGIN_VALIDATE_RSP = 0x0704;
+    CID_OTHER_ONLINE_USER_INFO = 0x0708;
+    CID_OTHER_MSG_SERV_INFO = 0x0709;
+    CID_OTHER_USER_CNT_UPDATE = 0x070b;
+}
+
+
+enum MsgType {
+    MSG_TYPE_UNKNOW = 0x00;
+    MSG_TYPE_SINGLE_TEXT = 0x01;
+    MSG_TYPE_GROUP_TEXT = 0x11;
+}
+
+enum ClientType {
+    CLIENT_TYPE_UNKNOW = 0;
+    CLIENT_TYPE_WINDOWS = 0x01;
+}
+
+enum UserStatType {
+    USER_STATUS_UNKNOW = 0;
+    USER_STATUS_ONLINE = 1;
+    USER_STATUS_OFFLINE = 2;
+}
+
+enum ResultType {
+    REFUSE_REASON_NONE = 0;
+    REFUSE_REASON_NO_MSG_SERVER = 1;
+    REFUSE_REASON_MSG_SERVER_FULL = 2;
+    REFUSE_REASON_NO_DB_SERVER = 3;
+    REFUSE_REASON_NO_LOGIN_SERVER = 4;
+    REFUSE_REASON_NO_ROUTE_SERVER = 5;
+    REFUSE_REASON_DB_VALIDATE_FAILED = 6;
+    REFUSE_REASON_VERSION_TOO_OLD = 7;
+}
+
+message UserInfo {
+    uint32 user_id = 1;
+    string user_name = 2;
+}
+
+message ServerUserStat {
+    uint32 user_id = 1;
+    UserStatType status = 2;
+    ClientType client_type = 3;
+}

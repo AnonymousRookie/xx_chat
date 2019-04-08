@@ -34,3 +34,21 @@ Release
 *.suo
 *.sdf
 *.opensdf
+
+
+# pb
+*.pb.h
+*.pb.cc
+
+# cmake
+CMakeCache.txt
+*.bin
+*.cmake
+*.rule
+*.log
+*.cxx
+*.check_cache
+*.stamp
+*.depend
+*.list
+*.db

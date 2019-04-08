@@ -1,0 +1,6 @@
+{
+    "route_server_info": {
+        "listen_ip":"0.0.0.0", 
+        "listen_port":8200
+    }
+}

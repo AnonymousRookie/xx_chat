@@ -1,0 +1,9 @@
+syntax = "proto3";
+package im.other;
+import "im.base.proto";
+option optimize_for = LITE_RUNTIME;
+
+// 心跳包
+message HeartBeat {
+    // cmd id: 0x0701
+}

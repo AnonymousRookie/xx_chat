@@ -1,0 +1,4 @@
+syntax = "proto3";
+package im.message;
+import "im.base.proto";
+option optimize_for = LITE_RUNTIME;
