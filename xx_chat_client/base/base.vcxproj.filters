@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{6b0c0717-e01a-40f6-8ba2-1ad3381bf48f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{28f2a681-522e-4e7e-abe7-7dc0b82d344a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\network">
+      <UniqueIdentifier>{e156e56e-6334-417a-8493-7ebd568b43c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\base.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\string_util.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\base_socket.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\event_dispatch.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\http_parser_wrapper.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\im_conn.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\im_pdu_base.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\net_lib.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\serv_info.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\thread.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\thread_pool.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\util_pdu.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\utils.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\config_file_reader.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\logger.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\base.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\base_global.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\string_util.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\defines.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\base_socket.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\event_dispatch.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\http_parser_wrapper.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\im_conn.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\im_pdu_base.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\net_lib.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\serv_info.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\task.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\thread.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\thread_pool.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\util_pdu.h">
+      <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utils.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\types.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\config_file_reader.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\logger.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

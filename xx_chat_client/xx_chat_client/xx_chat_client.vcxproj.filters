@@ -1,146 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Generated Files">
-      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
-      <Extensions>moc;h;cpp</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
-    </Filter>
-    <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{9c9e4fe0-54c8-4b66-8676-7f2f200174d5}</UniqueIdentifier>
-      <Extensions>cpp;moc</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
-    </Filter>
-    <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{79073050-7c0c-49ef-9547-e11960fb4505}</UniqueIdentifier>
-      <Extensions>cpp;moc</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
-    </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{7fa26105-9ef2-4e0f-8ce8-47cfbc46bf14}</UniqueIdentifier>
+      <UniqueIdentifier>{a26c7e6e-fe06-4965-8826-65e991a9663c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\ui">
-      <UniqueIdentifier>{bca2c3b7-ff42-41a2-b45d-5facc616de7d}</UniqueIdentifier>
+    <Filter Include="ui">
+      <UniqueIdentifier>{b66379af-6922-48a6-b606-5c10f56e855a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\utils">
-      <UniqueIdentifier>{6013b42b-732b-4151-b293-039982b9ab50}</UniqueIdentifier>
+    <Filter Include="src\login">
+      <UniqueIdentifier>{96501ca5-6d39-4971-a9d4-1207c40ff61d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\skin_engine">
-      <UniqueIdentifier>{d940cdaa-a30c-4a98-ac2b-fd0b27d66b4d}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{c2336a1f-3c90-415a-81dd-266864ebb917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\protocol">
+      <UniqueIdentifier>{555ac91a-4f3d-48d9-a737-a5e28521faf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\qrc_xx_chat_client.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
+    <QtRcc Include="xx_chat_client.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\xx_chat_client.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\core\operation_manager.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_xx_chat_client.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="src\core\operation.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_xx_chat_client.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="src\core\http_operation.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\main_window.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\core\http_pool_module.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_main_window.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="src\login\login_http_server_operation.cpp">
+      <Filter>src\login</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_main_window.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="src\login\login_module.cpp">
+      <Filter>src\login</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\menu.cpp">
-      <Filter>src\utils</Filter>
+    <ClCompile Include="src\login\login_win.cpp">
+      <Filter>src\login</Filter>
     </ClCompile>
-    <ClCompile Include="src\login_widget.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\login\login_operation.cpp">
+      <Filter>src\login</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_login_widget.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="src\core\tcp_client_module.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_login_widget.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="src\protocol\im.base.pb.cc">
+      <Filter>src\protocol</Filter>
     </ClCompile>
-    <ClCompile Include="src\global.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\protocol\im.login.pb.cc">
+      <Filter>src\protocol</Filter>
     </ClCompile>
-    <ClCompile Include="src\system_tray.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\protocol\im.message.pb.cc">
+      <Filter>src\protocol</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_system_tray.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="src\protocol\im.other.pb.cc">
+      <Filter>src\protocol</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_system_tray.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="src\protocol\im.server.pb.cc">
+      <Filter>src\protocol</Filter>
     </ClCompile>
-    <ClCompile Include="src\skin_engine\skin_engine.cpp">
-      <Filter>src\skin_engine</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_skin_engine.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_skin_engine.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="src\core\http_client.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="xx_chat_client.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\xx_chat_client.h">
-      <Filter>src</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\main_window.h">
-      <Filter>src</Filter>
-    </CustomBuild>
-    <CustomBuild Include="xx_chat_client.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\login_widget.h">
-      <Filter>src</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\ui\login_widget.ui">
-      <Filter>src\ui</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\ui\main_window.ui">
-      <Filter>src\ui</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\system_tray.h">
-      <Filter>src</Filter>
-    </CustomBuild>
-    <CustomBuild Include="src\skin_engine\skin_engine.h">
-      <Filter>src\skin_engine</Filter>
-    </CustomBuild>
+    <QtMoc Include="src\login\login_win.h">
+      <Filter>src\login</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_xx_chat_client.h">
-      <Filter>Generated Files</Filter>
+    <QtUic Include="ui\login_win.ui">
+      <Filter>ui</Filter>
+    </QtUic>
+    <QtUic Include="ui\xx_chat_client.ui">
+      <Filter>ui</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\operation_manager.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\menu.h">
-      <Filter>src\utils</Filter>
+    <ClInclude Include="src\core\operation.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_login_widget.h">
-      <Filter>Generated Files</Filter>
+    <ClInclude Include="src\core\http_operation.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_main_window.h">
-      <Filter>Generated Files</Filter>
+    <ClInclude Include="src\core\http_pool_module.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\global.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\login\login_http_server_operation.h">
+      <Filter>src\login</Filter>
+    </ClInclude>
+    <ClInclude Include="src\login\login_module.h">
+      <Filter>src\login</Filter>
+    </ClInclude>
+    <ClInclude Include="src\login\login_operation.h">
+      <Filter>src\login</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\tcp_client_module.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.base.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.login.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.message.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.other.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.server.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\http_client.h">
+      <Filter>src\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

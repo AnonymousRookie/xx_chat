@@ -11,16 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <ProjectGuid>{5DFE7A82-1BD0-4BB0-BD17-055BF7175DBB}</ProjectGuid>
     <Keyword>QtVS_v301</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -50,11 +50,11 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <QtInstall>msvc2015</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <QtInstall>msvc2015</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -66,14 +66,14 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>.\src;..\;..\base\src;$(SolutionDir)\thirdparty\pb\include;$(SolutionDir)\thirdparty\curl\include;$(SolutionDir)\thirdparty\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>$(Qt_DEFINES_);BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BASE_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.\src;.\src\network\protocol;$(SolutionDir)\thirdparty\pb\include;$(SolutionDir)\thirdparty\rapidjson\include;$(SolutionDir)\thirdparty\http;.\src\util;$(SolutionDir)\thirdparty\curl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)\thirdparty\pb\lib;$(SolutionDir)\thirdparty\curl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,57 +82,51 @@
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>.\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BASE_LIB;BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="xx_chat_client.qrc" />
+    <ClCompile Include="src\base.cpp" />
+    <ClCompile Include="src\network\base_socket.cpp" />
+    <ClCompile Include="src\network\event_dispatch.cpp" />
+    <ClCompile Include="src\network\http_parser_wrapper.cpp" />
+    <ClCompile Include="src\network\im_conn.cpp" />
+    <ClCompile Include="src\network\im_pdu_base.cpp" />
+    <ClCompile Include="src\network\net_lib.cpp" />
+    <ClCompile Include="src\network\serv_info.cpp" />
+    <ClCompile Include="src\network\thread.cpp" />
+    <ClCompile Include="src\network\thread_pool.cpp" />
+    <ClCompile Include="src\network\util_pdu.cpp" />
+    <ClCompile Include="src\util\config_file_reader.cpp" />
+    <ClCompile Include="src\util\logger.cpp" />
+    <ClCompile Include="src\util\string_util.cpp" />
+    <ClCompile Include="src\util\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\http_client.cpp" />
-    <ClCompile Include="src\core\http_operation.cpp" />
-    <ClCompile Include="src\core\http_pool_module.cpp" />
-    <ClCompile Include="src\core\operation.cpp" />
-    <ClCompile Include="src\core\operation_manager.cpp" />
-    <ClCompile Include="src\core\tcp_client_module.cpp" />
-    <ClCompile Include="src\login\login_http_server_operation.cpp" />
-    <ClCompile Include="src\login\login_module.cpp" />
-    <ClCompile Include="src\login\login_operation.cpp" />
-    <ClCompile Include="src\login\login_win.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\protocol\im.base.pb.cc" />
-    <ClCompile Include="src\protocol\im.login.pb.cc" />
-    <ClCompile Include="src\protocol\im.message.pb.cc" />
-    <ClCompile Include="src\protocol\im.other.pb.cc" />
-    <ClCompile Include="src\protocol\im.server.pb.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="ui\login_win.ui" />
-    <QtUic Include="ui\xx_chat_client.ui" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\login\login_win.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\core\http_client.h" />
-    <ClInclude Include="src\core\http_operation.h" />
-    <ClInclude Include="src\core\http_pool_module.h" />
-    <ClInclude Include="src\core\operation.h" />
-    <ClInclude Include="src\core\operation_manager.h" />
-    <ClInclude Include="src\core\tcp_client_module.h" />
-    <ClInclude Include="src\login\login_http_server_operation.h" />
-    <ClInclude Include="src\login\login_module.h" />
-    <ClInclude Include="src\login\login_operation.h" />
-    <ClInclude Include="src\protocol\im.base.pb.h" />
-    <ClInclude Include="src\protocol\im.login.pb.h" />
-    <ClInclude Include="src\protocol\im.message.pb.h" />
-    <ClInclude Include="src\protocol\im.other.pb.h" />
-    <ClInclude Include="src\protocol\im.server.pb.h" />
+    <ClInclude Include="src\base.h" />
+    <ClInclude Include="src\base_global.h" />
+    <ClInclude Include="src\defines.h" />
+    <ClInclude Include="src\network\base_socket.h" />
+    <ClInclude Include="src\network\event_dispatch.h" />
+    <ClInclude Include="src\network\http_parser_wrapper.h" />
+    <ClInclude Include="src\network\im_conn.h" />
+    <ClInclude Include="src\network\im_pdu_base.h" />
+    <ClInclude Include="src\network\net_lib.h" />
+    <ClInclude Include="src\network\serv_info.h" />
+    <ClInclude Include="src\network\task.h" />
+    <ClInclude Include="src\network\thread.h" />
+    <ClInclude Include="src\network\thread_pool.h" />
+    <ClInclude Include="src\network\util_pdu.h" />
+    <ClInclude Include="src\types.h" />
+    <ClInclude Include="src\util\config_file_reader.h" />
+    <ClInclude Include="src\util\logger.h" />
+    <ClInclude Include="src\util\string_util.h" />
+    <ClInclude Include="src\util\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
@@ -140,4 +134,9 @@
   </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" MocOptions="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

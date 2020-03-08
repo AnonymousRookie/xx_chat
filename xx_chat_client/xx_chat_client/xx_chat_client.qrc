@@ -1,4 +1,4 @@
 <RCC>
-    <qresource prefix="xx_chat_client">
+    <qresource prefix="XXChatClient">
     </qresource>
 </RCC>
