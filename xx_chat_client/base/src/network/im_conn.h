@@ -40,7 +40,7 @@ public:
     virtual void OnTimer(uint64_t curr_tick) {}
     virtual void OnWriteCompelete() {}
 
-    virtual void HandlePdu(ImPdu* pPdu) {}
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pPdu) {}
 
 protected:
     net_handle_t handle_;

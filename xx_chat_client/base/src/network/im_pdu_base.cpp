@@ -113,21 +113,19 @@ int ImPdu::ReadPduHeader(uchar_t* buf, uint32_t len)
 	return ret;
 }
 
-ImPdu* ImPdu::ReadPdu(uchar_t* buf, uint32_t len)
+std::shared_ptr<ImPdu> ImPdu::ReadPdu(uchar_t* buf, uint32_t len)
 {
 	uint32_t pdu_len = 0;
     if (!IsPduAvailable(buf, len, pdu_len)) {
-        return NULL;
+        return nullptr;
     }
 
 	uint16_t service_id = ByteStream::ReadUint16(buf + 8);
 	uint16_t command_id = ByteStream::ReadUint16(buf + 10);
 
-	ImPdu* pPdu = NULL;
-    pPdu = new ImPdu();
+    std::shared_ptr<ImPdu> pPdu = std::make_shared<ImPdu>();
     pPdu->Write(buf, pdu_len);
     pPdu->ReadPduHeader(buf, IM_PDU_HEADER_LEN);
-    
     return pPdu;
 }
 

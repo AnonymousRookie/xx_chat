@@ -78,7 +78,7 @@ public:
     void WriteHeader();
     
     static bool IsPduAvailable(uchar_t* buf, uint32_t len, uint32_t& pdu_len);
-    static ImPdu* ReadPdu(uchar_t* buf, uint32_t len);
+    static std::shared_ptr<ImPdu> ReadPdu(uchar_t* buf, uint32_t len);
     void Write(uchar_t* buf, uint32_t len) { buf_.Write((void*)buf, len); }
     int ReadPduHeader(uchar_t* buf, uint32_t len);
     void SetPBMsg(const google::protobuf::MessageLite* msg);
