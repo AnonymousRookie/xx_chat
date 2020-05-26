@@ -6,7 +6,7 @@ option optimize_for = LITE_RUNTIME;
 enum ServiceID {
     SID_UNKNOW = 0x0000;
     SID_LOGIN = 0x0001;       // for login
-    SID_FRIEND_LIST = 0x0003; // for friend list
+    SID_BUDDY_LIST = 0x0003; // for friend list
     SID_MSG = 0x0004;
     SID_OTHER = 0x0007;
 }
@@ -20,6 +20,12 @@ enum LoginCmdID {
     CID_LOGIN_RES_USERLOGIN = 0x0104;
     CID_LOGIN_REQ_LOGINOUT = 0x0105;
     CID_LOGIN_RES_LOGINOUT = 0x0106;
+}
+
+enum BuddyListCmdID {
+    CID_BUDDY_LIST_UNKNOW = 0x00;
+    CID_BUDDY_LIST_ALL_USER_REQ = 0x0201;
+    CID_BUDDY_LIST_ALL_USER_RSP = 0x0202;
 }
 
 enum OtherCmdID {
@@ -71,3 +77,4 @@ message ServerUserStat {
     UserStatType status = 2;
     ClientType client_type = 3;
 }
+

@@ -17,5 +17,6 @@ protoc -I=%SRC_DIR% --cpp_out=%DST_DIR%\cpp\ %SRC_DIR%\im.login.proto
 protoc -I=%SRC_DIR% --cpp_out=%DST_DIR%\cpp\ %SRC_DIR%\im.message.proto
 protoc -I=%SRC_DIR% --cpp_out=%DST_DIR%\cpp\ %SRC_DIR%\im.other.proto
 protoc -I=%SRC_DIR% --cpp_out=%DST_DIR%\cpp\ %SRC_DIR%\im.server.proto
+protoc -I=%SRC_DIR% --cpp_out=%DST_DIR%\cpp\ %SRC_DIR%\im.buddy.proto
 
 xcopy %DST_DIR%\cpp\* %CPP_DIR%\ /c/q/e
