@@ -10,7 +10,7 @@
 #include "proxy_task.h"
 #include "proxy_conn.h"
 
-ProxyTask::ProxyTask(uint32_t connUuid, pdu_handler_t pduHandler, ImPdu* pdu)
+ProxyTask::ProxyTask(uint32_t connUuid, pdu_handler_t pduHandler, std::shared_ptr<ImPdu> pdu)
 {
     connUuid_ = connUuid;
     pduHandler_ = pduHandler;

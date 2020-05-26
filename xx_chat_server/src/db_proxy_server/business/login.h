@@ -14,7 +14,7 @@
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(business)
 
-void DoLogin(ImPdu* pdu, uint32_t connUuid);
+void DoLogin(std::shared_ptr<ImPdu> pdu, uint32_t connUuid);
 
 NAMESPACE_END(business)
 NAMESPACE_END(z)

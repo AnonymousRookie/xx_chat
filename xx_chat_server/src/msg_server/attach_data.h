@@ -10,6 +10,10 @@
 
 #include "util_pdu.h"
 
+enum AttachDataType {
+    attachDataType_Handle = 1,
+};
+
 class AttachData
 {
 public:

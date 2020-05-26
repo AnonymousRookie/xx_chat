@@ -29,12 +29,14 @@ public:
     void SetValidate(bool validate = true) { validate_ = validate; }
 
     user_conn_t GetUserConn();
+    MsgConn* GetMsgConn(uint32_t handle);
 
+    void AddMsgConn(uint32_t handle, MsgConn* conn) { connMap_[handle] = conn; }
     bool IsMsgConnEmpty() { return connMap_.empty(); }
 
     std::map<uint32_t, MsgConn*>& GetMsgConnMap() { return connMap_; }
 
-    void AddUnValidateMsgConn(MsgConn* conn) { unValidateConnSet_.insert(conn); };
+    void AddUnValidateMsgConn(MsgConn* conn) { unValidateConnSet_.insert(conn); }
     void DelUnValidateMsgConn(MsgConn* conn) { unValidateConnSet_.erase(conn); }
     MsgConn* GetUnValidateMsgConn(uint32_t handle);
 
@@ -68,6 +70,7 @@ public:
 
     void GetOnlineUserInfo(std::list<user_stat_t>* online_user_info);
     void GetUserConnCnt(std::list<user_conn_t>* user_conn_list, uint32_t* total_conn_cnt);
+    MsgConn* GetMsgConnByHandle(uint32_t userId, uint32_t handle);
 
 private:
     ImUserIdMap userIdMap_;

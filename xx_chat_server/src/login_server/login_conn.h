@@ -38,12 +38,12 @@ public:
     virtual void Close();
     virtual void OnClose();
     virtual void OnTimer(uint64_t curr_tick);
-    virtual void HandlePdu(ImPdu* pPdu);
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pPdu);
 
 private:
-    void HandleMsgServInfo(ImPdu* pPdu);
-    void HandleUserCntUpdate(ImPdu* pPdu);
-    void HandleMsgServRequest(ImPdu* pPdu);
+    void HandleMsgServInfo(std::shared_ptr<ImPdu> pPdu);
+    void HandleUserCntUpdate(std::shared_ptr<ImPdu> pPdu);
+    void HandleMsgServRequest(std::shared_ptr<ImPdu> pPdu);
 
 private:
     int connType_;

@@ -22,13 +22,13 @@ public:
 	virtual void OnClose();
 	virtual void OnTimer(uint64_t curr_tick);
 
-	virtual void HandlePdu(ImPdu* pPdu);
+	virtual void HandlePdu(std::shared_ptr<ImPdu> pPdu);
 
 private:
-	void HandleOnlineUserInfo(ImPdu* pdu);
+	void HandleOnlineUserInfo(std::shared_ptr<ImPdu> pdu);
 
 private:
-	void SendPduToUser(uint32_t userId, ImPdu* pdu, bool all);
+	void SendPduToUser(uint32_t userId, std::shared_ptr<ImPdu> pdu, bool all);
 
 private:
 	bool master_;

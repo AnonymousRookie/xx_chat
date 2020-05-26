@@ -28,7 +28,7 @@ public:
     virtual void OnConfirm();
     virtual void OnClose();
     virtual void OnTimer(uint64_t curr_tick);
-    virtual void HandlePdu(ImPdu* pPdu);
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pPdu);
 
 private:
     bool opened_;
@@ -43,7 +43,7 @@ void init_login_serv_conn(ServerListType* server_list,
                           uint32_t max_conn_cnt);
 
 bool is_login_server_available();
-void send_to_all_login_server(ImPdu* pPdu);
+void send_to_all_login_server(std::shared_ptr<ImPdu> pPdu);
 
 
 #endif  // MSG_SERVER_LOGIN_SERVER_CONN_H

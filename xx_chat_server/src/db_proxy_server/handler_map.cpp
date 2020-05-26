@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "im.base.pb.h"
 #include "business/login.h"
+#include "business/user_action.h"
 #include "handler_map.h"
 
 HandlerMapManager* HandlerMapManager::handlerMapManagerInstance_ = NULL;
@@ -33,6 +34,7 @@ void HandlerMapManager::Init()
 {
     // login validate
     handlerMap_.insert(std::make_pair(im::base::OtherCmdID::CID_OTHER_LOGIN_VALIDATE_REQ, z::business::DoLogin));
+    handlerMap_.insert(std::make_pair(im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_REQ, z::business::GetAllUser));
 }
 
 pdu_handler_t HandlerMapManager::GetHandler(uint32_t pduType)

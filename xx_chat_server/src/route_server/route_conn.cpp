@@ -115,7 +115,7 @@ void RouteConn::OnTimer(uint64_t currTick)
     }
 }
 
-void RouteConn::HandlePdu(ImPdu* pdu)
+void RouteConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
 {
     switch(pdu->GetCommandId())
     {
@@ -131,7 +131,7 @@ void RouteConn::HandlePdu(ImPdu* pdu)
     }
 }
 
-void RouteConn::HandleOnlineUserInfo(ImPdu* pdu)
+void RouteConn::HandleOnlineUserInfo(std::shared_ptr<ImPdu> pdu)
 {
     im::server::OnlineUserInfo msg;
     msg.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
@@ -139,7 +139,7 @@ void RouteConn::HandleOnlineUserInfo(ImPdu* pdu)
     LOG_INFO("HandleOnlineUserInfo userCount = %u", userCount);
 }
 
-void RouteConn::SendPduToUser(uint32_t userId, ImPdu* pdu, bool all)
+void RouteConn::SendPduToUser(uint32_t userId, std::shared_ptr<ImPdu> pdu, bool all)
 {
     auto user = GetUserInfo(userId);
     if (!user) {

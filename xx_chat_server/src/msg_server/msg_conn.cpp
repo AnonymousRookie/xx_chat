@@ -10,6 +10,7 @@
 #include "im.base.pb.h"
 #include "im.login.pb.h"
 #include "im.server.pb.h"
+#include "im.buddy.pb.h"
 #include "utils.h"
 #include "msg_conn.h"
 #include "im_pdu_base.h"
@@ -101,7 +102,7 @@ void MsgConn::OnTimer(uint64_t currTick)
     }
 }
 
-void MsgConn::HandlePdu(ImPdu* pdu)
+void MsgConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
 {
     switch (pdu->GetCommandId())
     {
@@ -113,13 +114,16 @@ void MsgConn::HandlePdu(ImPdu* pdu)
         LOG_INFO("MsgConn recv CID_LOGIN_REQ_USERLOGIN");
         HandleLoginRequest(pdu);
         break;
+    case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_REQ:
+        HandleBuddyListAllUserRequest(pdu);
+        break;
     default:
         LOG_WARN("MsgConn recv 未知消息: %d", pdu->GetCommandId());
         break;
     }
 }
 
-void MsgConn::HandleLoginRequest(ImPdu* pdu)
+void MsgConn::HandleLoginRequest(std::shared_ptr<ImPdu> pdu)
 {
     uint32_t result = 0;
     std::string resultStr("");
@@ -170,7 +174,7 @@ void MsgConn::HandleLoginRequest(ImPdu* pdu)
     }
     imUser->AddUnValidateMsgConn(this);
 
-    AttachData attachData(1, handle_, 0);
+    AttachData attachData(attachDataType_Handle, handle_, 0);
 
     // 向db_proxy_server发送登录验证请求
     im::server::LoginValidateReq loginValidateReq;
@@ -184,4 +188,19 @@ void MsgConn::HandleLoginRequest(ImPdu* pdu)
     loginValidateReqPdu.SetCommandId(im::base::OtherCmdID::CID_OTHER_LOGIN_VALIDATE_REQ);
     loginValidateReqPdu.SetSeqNum(pdu->GetSeqNum());
     dbConn->SendPdu(&loginValidateReqPdu);
+}
+
+void MsgConn::HandleBuddyListAllUserRequest(std::shared_ptr<ImPdu> pdu)
+{
+    im::buddy::AllUserReq msg;
+    msg.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
+
+    DBServConnPtr dbconn = get_db_serv_conn();
+    if (dbconn) {
+        AttachData attachData(attachDataType_Handle, handle_, 0);
+        msg.set_user_id(GetUserId());
+        msg.set_attach_data(attachData.GetBuffer(), attachData.GetLength());
+        pdu->SetPBMsg(&msg);
+        dbconn->SendPdu(pdu);
+    }
 }

@@ -25,10 +25,11 @@ public:
     virtual void OnConfirm();
     virtual void OnClose();
     virtual void OnTimer(uint64_t currTick);
-    virtual void HandlePdu(ImPdu* pdu);
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pdu);
 
 private:
-    void HandleLoginValidResponse(ImPdu* pdu);
+    void HandleLoginValidResponse(std::shared_ptr<ImPdu> pdu);
+    void HandleBuddyListAllUserResponse(std::shared_ptr<ImPdu> pdu);
 
 private:
     bool opened_;

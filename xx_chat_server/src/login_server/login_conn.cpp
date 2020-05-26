@@ -124,7 +124,7 @@ void LoginConn::OnTimer(uint64_t curr_tick)
     }
 }
 
-void LoginConn::HandlePdu(ImPdu* pPdu)
+void LoginConn::HandlePdu(std::shared_ptr<ImPdu> pPdu)
 {
     switch(pPdu->GetCommandId()) {
         case im::base::OtherCmdID::CID_OTHER_HEARTBEAT:
@@ -145,7 +145,7 @@ void LoginConn::HandlePdu(ImPdu* pPdu)
     }
 }
 
-void LoginConn::HandleMsgServInfo(ImPdu* pPdu)
+void LoginConn::HandleMsgServInfo(std::shared_ptr<ImPdu> pPdu)
 {
     msg_serv_info_t* pMsgServInfo = new msg_serv_info_t;
     im::server::MsgServInfo msg;
@@ -167,7 +167,7 @@ void LoginConn::HandleMsgServInfo(ImPdu* pPdu)
 }
 
 
-void LoginConn::HandleUserCntUpdate(ImPdu* pPdu)
+void LoginConn::HandleUserCntUpdate(std::shared_ptr<ImPdu> pPdu)
 {
     auto it = g_msg_serv_info.find(handle_);
     if (it != g_msg_serv_info.end()) {
@@ -189,7 +189,7 @@ void LoginConn::HandleUserCntUpdate(ImPdu* pPdu)
     }
 }
 
-void LoginConn::HandleMsgServRequest(ImPdu* pPdu)
+void LoginConn::HandleMsgServRequest(std::shared_ptr<ImPdu> pPdu)
 {
     im::login::MsgServReq reqMsg;
     reqMsg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength());

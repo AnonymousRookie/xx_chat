@@ -35,10 +35,11 @@ public:
     virtual void OnConnect(net_handle_t handle);
     virtual void OnClose();
     virtual void OnTimer(uint64_t curr_tick);
-    virtual void HandlePdu(ImPdu* pPdu);
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pPdu);
 
 private:
-    void HandleLoginRequest(ImPdu* pdu);
+    void HandleLoginRequest(std::shared_ptr<ImPdu> pdu);
+    void HandleBuddyListAllUserRequest(std::shared_ptr<ImPdu> pdu);
 
 private:
     std::string loginName_;

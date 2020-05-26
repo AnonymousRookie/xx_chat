@@ -11,6 +11,7 @@
 #include "im.other.pb.h"
 #include "im.server.pb.h"
 #include "im.login.pb.h"
+#include "im.buddy.pb.h"
 #include "im_pdu_base.h"
 #include "db_server_conn.h"
 #include "im_user.h"
@@ -165,7 +166,7 @@ void DBServConn::OnTimer(uint64_t currTick)
     }
 }
 
-void DBServConn::HandlePdu(ImPdu* pdu)
+void DBServConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
 {
     switch (pdu->GetCommandId()) {
     case im::base::OtherCmdID::CID_OTHER_HEARTBEAT:
@@ -174,13 +175,16 @@ void DBServConn::HandlePdu(ImPdu* pdu)
     case im::base::OtherCmdID::CID_OTHER_LOGIN_VALIDATE_RSP:
         HandleLoginValidResponse(pdu);
         break;
+    case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_RSP:
+        HandleBuddyListAllUserResponse(pdu);
+        break;
     default:
         LOG_WARN("DBServConn unknown cmd id=%d", pdu->GetCommandId());
         break;
     }
 }
 
-void DBServConn::HandleLoginValidResponse(ImPdu* pdu)
+void DBServConn::HandleLoginValidResponse(std::shared_ptr<ImPdu> pdu)
 {
     im::server::LoginValidateRsp loginValidateRsp;
     loginValidateRsp.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
@@ -237,6 +241,8 @@ void DBServConn::HandleLoginValidResponse(ImPdu* pdu)
     ImUserManager::GetInstance()->AddImUserById(userId, user);
     msgConn->SetUserId(userId);
     msgConn->SetOpen();
+    user->AddMsgConn(msgConn->GetHandle(), msgConn);
+    user->DelUnValidateMsgConn(msgConn);
 
     im::login::LoginRes loginRes;
     loginRes.set_server_time(time(NULL));
@@ -253,4 +259,26 @@ void DBServConn::HandleLoginValidResponse(ImPdu* pdu)
     loginResPdu.SetCommandId(im::base::LoginCmdID::CID_LOGIN_RES_USERLOGIN);
     loginResPdu.SetSeqNum(loginResPdu.GetSeqNum());
     msgConn->SendPdu(&loginResPdu);
+}
+
+void DBServConn::HandleBuddyListAllUserResponse(std::shared_ptr<ImPdu> pdu)
+{
+    im::buddy::AllUserRsp allUserRsp;
+    allUserRsp.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
+
+    uint32_t userId = allUserRsp.user_id();
+    uint32_t userCount = allUserRsp.user_info_list_size();
+    AttachData attachData((uchar_t*)allUserRsp.attach_data().c_str(), allUserRsp.attach_data().length());
+
+    ImUser* imUser = ImUserManager::GetInstance()->GetImUserById(userId);
+    if (!imUser) {
+        LOG_WARN("ImUser for userId:%d not exist", userId);
+        return;
+    }
+    MsgConn* msgConn = imUser->GetMsgConn(attachData.GetHandle());
+    if (msgConn && msgConn->IsOpen()) {
+        allUserRsp.clear_attach_data();
+        pdu->SetPBMsg(&allUserRsp);
+        msgConn->SendPdu(pdu);
+    }
 }

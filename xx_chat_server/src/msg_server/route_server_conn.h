@@ -27,7 +27,7 @@ public:
 	virtual void OnConfirm();
 	virtual void OnClose();
 	virtual void OnTimer(uint64_t currTick);
-	virtual void HandlePdu(ImPdu* pdu);
+	virtual void HandlePdu(std::shared_ptr<ImPdu> pdu);
 
 private:
 	bool 		opened_;
@@ -39,7 +39,7 @@ typedef std::shared_ptr<RouteServConn> RouteServConnPtr;
 
 void init_route_serv_conn(ServerListType* server_list);
 bool is_route_server_available();
-void send_to_all_route_server(ImPdu* pPdu);
+void send_to_all_route_server(std::shared_ptr<ImPdu> pPdu);
 
 
 #endif  // MSG_SERVER_ROUTE_SERVER_CONN_H

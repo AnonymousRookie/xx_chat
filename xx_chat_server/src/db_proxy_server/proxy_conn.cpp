@@ -183,8 +183,7 @@ void ProxyConn::OnTimer(uint64_t curr_tick)
 
 void ProxyConn::HandlePduBuf(uchar_t* pdu_buf, uint32_t pdu_len)
 {
-    ImPdu* pdu = NULL;
-    pdu = ImPdu::ReadPdu(pdu_buf, pdu_len);
+    auto pdu = ImPdu::ReadPdu(pdu_buf, pdu_len);
     auto commandId = pdu->GetCommandId();
     if (im::base::OtherCmdID::CID_OTHER_HEARTBEAT == commandId) {
         //LOG_INFO("ProxyConn recv CID_OTHER_HEARTBEAT");

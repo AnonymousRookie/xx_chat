@@ -48,6 +48,16 @@ MsgConn* ImUser::GetUnValidateMsgConn(uint32_t handle)
     return nullptr;
 }
 
+MsgConn* ImUser::GetMsgConn(uint32_t handle)
+{
+    MsgConn* conn = nullptr;
+    auto iter = connMap_.find(handle);
+    if (iter != connMap_.end()) {
+        conn = iter->second;
+    }
+    return conn;
+}
+
 ImUserManager::ImUserManager()
 {
 
@@ -144,4 +154,14 @@ void ImUserManager::GetUserConnCnt(std::list<user_conn_t>* user_conn_list, uint3
             *total_conn_cnt += userConn.conn_cnt;
         }
     }
+}
+
+MsgConn* ImUserManager::GetMsgConnByHandle(uint32_t userId, uint32_t handle)
+{
+    MsgConn* conn = NULL;
+    ImUser* user = GetImUserById(userId);
+    if (user) {
+        conn = user->GetMsgConn(handle);
+    }
+    return conn;
 }

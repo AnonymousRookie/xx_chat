@@ -61,7 +61,7 @@ bool is_route_server_available()
 	return false;
 }
 
-void send_to_all_route_server(ImPdu* pPdu)
+void send_to_all_route_server(std::shared_ptr<ImPdu> pPdu)
 {
     Z_CHECK(g_route_server_list);
     for (uint32_t i = 0; i < g_route_server_list->size(); ++i) {
@@ -190,7 +190,7 @@ void RouteServConn::OnTimer(uint64_t currTick)
 	}
 }
 
-void RouteServConn::HandlePdu(ImPdu* pdu)
+void RouteServConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
 {
 	switch (pdu->GetCommandId()) {
         case im::base::OtherCmdID::CID_OTHER_HEARTBEAT:

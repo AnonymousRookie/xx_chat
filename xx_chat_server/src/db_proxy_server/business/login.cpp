@@ -17,7 +17,7 @@ InterLoginStrategy g_interLoginStrategy;
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(business)
 
-void DoLogin(ImPdu* pdu, uint32_t connUuid)
+void DoLogin(std::shared_ptr<ImPdu> pdu, uint32_t connUuid)
 {
     ImPduPtr responsePdu = std::make_shared<ImPdu>();
 
