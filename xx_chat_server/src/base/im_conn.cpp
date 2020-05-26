@@ -133,22 +133,16 @@ void ImConn::OnRead()
         lastRecvTick_ = z::utils::GetTickCount();
     }
 
-    ImPdu* pPdu = NULL;
+    std::shared_ptr<ImPdu> pPdu = nullptr;
     try {
         while ((pPdu = ImPdu::ReadPdu(inBuf_.GetBuffer(), inBuf_.GetWriteOffset()))) {
             uint32_t pdu_len = pPdu->GetLength();
             HandlePdu(pPdu);
             inBuf_.Read(NULL, pdu_len);
-            delete pPdu;
-            pPdu = NULL;
         }
     } catch (PduException& ex) {
         printf("!!!catch exception, sid=%u, cid=%u, err_code=%u, err_msg=%s, close the connection ",
                 ex.GetServiceId(), ex.GetCommandId(), ex.GetErrorCode(), ex.GetErrorMsg());
-        if (pPdu) {
-            delete pPdu;
-            pPdu = NULL;
-        }
         OnClose();
     }
 }
