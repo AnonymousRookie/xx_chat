@@ -48,5 +48,22 @@ void CallbackOperation::SyncCallback(std::shared_ptr<void> param)
     callback_(param);
 }
 
+
+LambdaOperation::LambdaOperation(std::function<void()> operationRun)
+    : operationRun_(operationRun)
+{
+
+}
+
+LambdaOperation::~LambdaOperation()
+{
+}
+
+void LambdaOperation::ProcessOperation()
+{
+    operationRun_();
+}
+
+
 NAMESPACE_END(core)
 NAMESPACE_END(z)

@@ -31,6 +31,9 @@
     <Filter Include="src\protocol">
       <UniqueIdentifier>{555ac91a-4f3d-48d9-a737-a5e28521faf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\user_list">
+      <UniqueIdentifier>{e726eb21-4564-4603-961b-fcd1b360a8a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="xx_chat_client.qrc">
@@ -86,10 +89,46 @@
     <ClCompile Include="src\core\http_client.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\protocol\im.buddy.pb.cc">
+      <Filter>src\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="src\user_list\user_list_module.cpp">
+      <Filter>src\user_list</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\module_base.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\module_observer.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\module_subject.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\event_manager.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_win.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\xx_chat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\event.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\login\login_win.h">
       <Filter>src\login</Filter>
+    </QtMoc>
+    <QtMoc Include="src\main_win.h">
+      <Filter>src</Filter>
+    </QtMoc>
+    <QtMoc Include="src\core\event_manager.h">
+      <Filter>src\core</Filter>
+    </QtMoc>
+    <QtMoc Include="src\xx_chat.h">
+      <Filter>src</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +136,9 @@
       <Filter>ui</Filter>
     </QtUic>
     <QtUic Include="ui\xx_chat_client.ui">
+      <Filter>ui</Filter>
+    </QtUic>
+    <QtUic Include="ui\main_win.ui">
       <Filter>ui</Filter>
     </QtUic>
   </ItemGroup>
@@ -141,6 +183,24 @@
       <Filter>src\protocol</Filter>
     </ClInclude>
     <ClInclude Include="src\core\http_client.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\protocol\im.buddy.pb.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\user_list\user_list_module.h">
+      <Filter>src\user_list</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\module_base.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\module_observer.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\module_subject.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\event.h">
       <Filter>src\core</Filter>
     </ClInclude>
   </ItemGroup>

@@ -94,9 +94,14 @@
     <QtRcc Include="xx_chat_client.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\event.cpp" />
+    <ClCompile Include="src\core\event_manager.cpp" />
     <ClCompile Include="src\core\http_client.cpp" />
     <ClCompile Include="src\core\http_operation.cpp" />
     <ClCompile Include="src\core\http_pool_module.cpp" />
+    <ClCompile Include="src\core\module_base.cpp" />
+    <ClCompile Include="src\core\module_observer.cpp" />
+    <ClCompile Include="src\core\module_subject.cpp" />
     <ClCompile Include="src\core\operation.cpp" />
     <ClCompile Include="src\core\operation_manager.cpp" />
     <ClCompile Include="src\core\tcp_client_module.cpp" />
@@ -105,34 +110,48 @@
     <ClCompile Include="src\login\login_operation.cpp" />
     <ClCompile Include="src\login\login_win.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\main_win.cpp" />
     <ClCompile Include="src\protocol\im.base.pb.cc" />
+    <ClCompile Include="src\protocol\im.buddy.pb.cc" />
     <ClCompile Include="src\protocol\im.login.pb.cc" />
     <ClCompile Include="src\protocol\im.message.pb.cc" />
     <ClCompile Include="src\protocol\im.other.pb.cc" />
     <ClCompile Include="src\protocol\im.server.pb.cc" />
+    <ClCompile Include="src\user_list\user_list_module.cpp" />
+    <ClCompile Include="src\xx_chat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ui\login_win.ui" />
+    <QtUic Include="ui\main_win.ui" />
     <QtUic Include="ui\xx_chat_client.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\login\login_win.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\core\event.h" />
+    <QtMoc Include="src\xx_chat.h" />
+    <QtMoc Include="src\core\event_manager.h" />
     <ClInclude Include="src\core\http_client.h" />
     <ClInclude Include="src\core\http_operation.h" />
     <ClInclude Include="src\core\http_pool_module.h" />
+    <ClInclude Include="src\core\module_base.h" />
+    <ClInclude Include="src\core\module_observer.h" />
+    <ClInclude Include="src\core\module_subject.h" />
     <ClInclude Include="src\core\operation.h" />
     <ClInclude Include="src\core\operation_manager.h" />
     <ClInclude Include="src\core\tcp_client_module.h" />
     <ClInclude Include="src\login\login_http_server_operation.h" />
     <ClInclude Include="src\login\login_module.h" />
     <ClInclude Include="src\login\login_operation.h" />
+    <QtMoc Include="src\main_win.h" />
     <ClInclude Include="src\protocol\im.base.pb.h" />
+    <ClInclude Include="src\protocol\im.buddy.pb.h" />
     <ClInclude Include="src\protocol\im.login.pb.h" />
     <ClInclude Include="src\protocol\im.message.pb.h" />
     <ClInclude Include="src\protocol\im.other.pb.h" />
     <ClInclude Include="src\protocol\im.server.pb.h" />
+    <ClInclude Include="src\user_list\user_list_module.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

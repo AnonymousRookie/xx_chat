@@ -12,6 +12,8 @@
 #include <memory>
 #include "base\src\defines.h"
 
+class ImPdu;
+
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(core)
 
@@ -68,12 +70,23 @@ private:
     OperationDelegate callback_;
 };
 
+class LambdaOperation : public Operation
+{
+public:
+    LambdaOperation(std::function<void()> operationRun);
+    ~LambdaOperation();
+    void ProcessOperation();
+
+private:
+    std::function<void()> operationRun_;
+};
+
 
 class IPduPacketParse
 {
 public:
     // 收到TcpClient网络包之后的回调接口
-    virtual void OnPacket() = 0;
+    virtual void OnPacket(std::shared_ptr<ImPdu> pdu) = 0;
 };
 
 

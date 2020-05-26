@@ -30,7 +30,8 @@ public:
 public:
     int Startup();
     void Shutdown();
-    int StartOperation(std::shared_ptr<Operation> operation, int32_t delay);
+    int StartOperation(std::shared_ptr<Operation> operation, int32_t delay = 0);
+    int StartOperationWithLambda(std::function<void()> operationRun, int32_t delay = 0);
 
 private:
     std::list<std::shared_ptr<Operation>> delayOperations_;     // 延时处理的操作

@@ -16,6 +16,7 @@
 #include "login_http_server_operation.h"
 #include "login_operation.h"
 #include "login_win.h"
+#include "login_module.h"
 
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(login)
@@ -82,15 +83,7 @@ void LoginWin::OnHttpLoginCallback(std::shared_ptr<void> param)
 
 void LoginWin::OnOperationCallback(std::shared_ptr<void> param)
 {
-    LoginMsgServerParam* loginParam = (LoginMsgServerParam*)param.get();
-    if (LOGIN_MSG_SERVER_SUCCESS == loginParam->result) {
-        LOG_INFO("%s连接msg_server成功!", username_.c_str());
 
-    }
-    else {
-        LOG_WARN("%s连接msg_server失败!", username_.c_str());
-
-    }
 }
 
 NAMESPACE_END(login)

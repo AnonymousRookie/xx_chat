@@ -17,10 +17,12 @@ LoginOperation::LoginOperation(z::core::OperationDelegate callback, LoginMsgServ
     : CallbackOperation(callback)
     , loginParam_(param)
 {
+
 }
 
 LoginOperation::~LoginOperation()
 {
+
 }
 
 void LoginOperation::ProcessOperation()
@@ -28,7 +30,7 @@ void LoginOperation::ProcessOperation()
     // Á¬½Ómsg_server
     std::string ip = "";
     uint16_t port = 0;
-    z::core::getTcpClientModule()->DoLogin(loginParam_.msgServerIp,
+    z::core::GetTcpClientModule()->DoLogin(loginParam_.msgServerIp,
         loginParam_.msgServerPort,
         loginParam_.username, 
         loginParam_.password,
@@ -37,9 +39,6 @@ void LoginOperation::ProcessOperation()
 
 void LoginOperation::OnLoginDone(std::shared_ptr<void> param)
 {
-    auto p = std::make_shared<LoginMsgServerParam>();
-    p->result = LOGIN_MSG_SERVER_SUCCESS;
-    SyncCallback(p);
 }
 
 NAMESPACE_END(login)

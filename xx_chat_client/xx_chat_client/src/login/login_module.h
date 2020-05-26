@@ -9,15 +9,21 @@
 
 #include "defines.h"
 #include "..\core\operation.h"
+#include "..\core\module_base.h"
+
+class ImPdu;
+class MainWin;
 
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(login)
 
-class ILoginModule : public z::core::IPduPacketParse
+class LoginWin;
+
+class ILoginModule : public z::core::IPduPacketParse, public z::core::ModuleBase
 {
 public:
     virtual bool ShowLoginDialog() = 0;
-    virtual void NotifyLoginDone() = 0;
+    virtual void NotifyLoginDone(std::shared_ptr<ImPdu> pdu) = 0;
 };
 
 ILoginModule* GetLoginModule();
@@ -29,11 +35,15 @@ public:
     LoginModule();
     virtual ~LoginModule();
 
-    virtual void OnPacket();
+    virtual void OnPacket(std::shared_ptr<ImPdu> pdu);
 
 public:
     virtual bool ShowLoginDialog();
-    virtual void NotifyLoginDone();
+    virtual void NotifyLoginDone(std::shared_ptr<ImPdu> pdu);
+
+private:
+    std::shared_ptr<LoginWin> loginDlg_;
+    std::shared_ptr<MainWin> mainWin_;
 };
 
 NAMESPACE_END(login)

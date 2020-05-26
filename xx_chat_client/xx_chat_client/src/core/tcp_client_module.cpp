@@ -13,8 +13,10 @@
 #include "..\protocol\im.other.pb.h"
 #include "..\login\login_module.h"
 #include "..\login\login_operation.h"
+#include "..\user_list\user_list_module.h"
 #include "tcp_client_module.h"
 #include "operation.h"
+#include "operation_manager.h"
 
 z::core::IPduPacketParse* getModule(uint16_t moduleId)
 {
@@ -36,7 +38,7 @@ NAMESPACE_BEGIN(core)
 
 static ConnMap g_client_conn;
 
-std::shared_ptr<ITcpClientModule> getTcpClientModule()
+std::shared_ptr<ITcpClientModule> GetTcpClientModule()
 {
     static std::shared_ptr<TcpClientModule> module = std::make_shared<TcpClientModule>();
     return module;
@@ -121,20 +123,27 @@ void TcpClientModule::OnTimer(uint64_t currentTick)
     }
 }
 
-void TcpClientModule::HandlePdu(ImPdu * pdu)
+void TcpClientModule::HandlePdu(std::shared_ptr<ImPdu> pdu)
 {
-    switch (pdu->GetCommandId()) {
-    case im::base::OtherCmdID::CID_OTHER_HEARTBEAT:
-        break;
-    case im::base::LoginCmdID::CID_LOGIN_RES_USERLOGIN:
-        HandleLoginResponse(pdu);
-        break;
-    default:
-        break;
-    }
+    Z_CHECK(pdu);
+
+    GetOperationManager()->StartOperationWithLambda(
+        [=]() 
+    {
+        switch (pdu->GetCommandId()) {
+        case im::base::OtherCmdID::CID_OTHER_HEARTBEAT:
+            break;
+        case im::base::LoginCmdID::CID_LOGIN_RES_USERLOGIN:
+            HandleLoginResponse(pdu);
+            break;
+        default:
+            HandlePackets(pdu);
+            break;
+        }
+    });
 }
 
-void TcpClientModule::HandleLoginResponse(ImPdu * pdu)
+void TcpClientModule::HandleLoginResponse(std::shared_ptr<ImPdu> pdu)
 {
     auto loginDoneCallbackParam = std::make_shared<z::login::LoginMsgServerParam>();
     loginDoneCallbackParam->result = z::login::LOGIN_MSG_SERVER_FAILED;
@@ -162,17 +171,41 @@ void TcpClientModule::HandleLoginResponse(ImPdu * pdu)
     im::base::UserInfo userInfo = loginRes.user_info();
 
     IPduPacketParse* pModule = z::login::GetLoginModule();
-    pModule->OnPacket();
+    pModule->OnPacket(pdu);
 
     z::net::netlib_register_timer(std::bind(&TcpClientModule::TimerCallback, 
         this, std::placeholders::_1, std::placeholders::_2), 100);
+}
 
+void TcpClientModule::HandlePackets(std::shared_ptr<ImPdu> pdu)
+{
+    IPduPacketParse* pModule = nullptr;
+    switch (pdu->GetCommandId()) {
+    case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_RSP:
+        pModule = z::user_list::GetUserListModule();
+        break;
+    default:
+        break;
+    }
+    Z_CHECK(pModule);
+    pModule->OnPacket(pdu);
 }
 
 void TcpClientModule::TimerCallback(uint8_t msg, uint32_t handle)
 {
     uint64_t curTick = z::utils::GetTickCount();
     OnTimer(curTick);
+}
+
+void TcpClientModule::SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg)
+{
+    ImPdu pdu;
+    pdu.SetPBMsg(pbMsg);
+    pdu.SetServiceId(serviceId);
+    pdu.SetCommandId(cmdId);
+    uint32_t seqNo = 0;
+    pdu.SetSeqNum(seqNo);
+    SendPdu(&pdu);
 }
 
 NAMESPACE_END(core)

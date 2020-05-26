@@ -9,7 +9,7 @@
 #include "util\logger.h"
 #include "network\net_lib.h"
 #include "core\operation_manager.h"
-#include "login\login_module.h"
+#include "xx_chat.h"
 
 #ifdef _WIN32
 #pragma comment(lib, "base.lib")
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
     z::net::netlib_start_event();
     z::core::GetOperationManager()->Startup();
-    z::login::GetLoginModule()->ShowLoginDialog();
+    XXChat::GetInstance()->Start();
 
     return a.exec();
 }

@@ -13,7 +13,14 @@
 #include "network\im_pdu_base.h"
 #include "network\im_conn.h"
 
-class im::login::LoginRes;
+NAMESPACE_BEGIN(im)
+NAMESPACE_BEGIN(login)
+
+class LoginRes;
+
+NAMESPACE_END(login)
+NAMESPACE_END(im)
+
 
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(core)
@@ -27,9 +34,13 @@ public:
         const std::string& username,
         const std::string& password,
         std::function<void(std::shared_ptr<void>)> loginDoneCallback) = 0;
+
+    // 发送协议包
+    virtual void SendPacket(ImPdu* pdu) {}
+    virtual void SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg) = 0;
 };
 
-std::shared_ptr<ITcpClientModule> getTcpClientModule();
+std::shared_ptr<ITcpClientModule> GetTcpClientModule();
 
 typedef std::function<void(std::shared_ptr<void>)> LoginDoneCallback;
 
@@ -47,6 +58,8 @@ public:
         const std::string& password,
         std::function<void(std::shared_ptr<void>)> loginDoneCallback);
 
+    virtual void SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg);
+
     virtual void Close();
     virtual void TimerCallback(uint8_t msg, uint32_t handle);
 
@@ -54,10 +67,11 @@ public:
     virtual void OnConfirm();
     virtual void OnClose();
     virtual void OnTimer(uint64_t currentTick);
-    virtual void HandlePdu(ImPdu* pdu);
+    virtual void HandlePdu(std::shared_ptr<ImPdu> pdu);
 
 private:
-    void HandleLoginResponse(ImPdu* pdu);
+    void HandleLoginResponse(std::shared_ptr<ImPdu> pdu);
+    void HandlePackets(std::shared_ptr<ImPdu> pdu);
 
 private:
     im::login::LoginRes* loginResp_;

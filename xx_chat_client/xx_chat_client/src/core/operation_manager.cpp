@@ -69,6 +69,12 @@ int OperationManager::StartOperation(std::shared_ptr<Operation> operation, int32
     return 0;
 }
 
+int OperationManager::StartOperationWithLambda(std::function<void()> operationRun, int32_t delay)
+{
+    std::shared_ptr<Operation> operation = std::make_shared<LambdaOperation>(operationRun);
+    return StartOperation(operation, delay);
+}
+
 OperationManager* GetOperationManager()
 {
     static OperationManager manager;
