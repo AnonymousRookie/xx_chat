@@ -103,6 +103,7 @@
     <ClCompile Include="src\network\thread_pool.cpp" />
     <ClCompile Include="src\network\util_pdu.cpp" />
     <ClCompile Include="src\util\config_file_reader.cpp" />
+    <ClCompile Include="src\util\file_util.cpp" />
     <ClCompile Include="src\util\logger.cpp" />
     <ClCompile Include="src\util\string_util.cpp" />
     <ClCompile Include="src\util\utils.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\network\util_pdu.h" />
     <ClInclude Include="src\types.h" />
     <ClInclude Include="src\util\config_file_reader.h" />
+    <ClInclude Include="src\util\file_util.h" />
     <ClInclude Include="src\util\logger.h" />
     <ClInclude Include="src\util\string_util.h" />
     <ClInclude Include="src\util\utils.h" />
