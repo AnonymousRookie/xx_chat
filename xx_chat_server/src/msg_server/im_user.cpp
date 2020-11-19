@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2018-2019, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -54,6 +54,16 @@ MsgConn* ImUser::GetMsgConn(uint32_t handle)
     auto iter = connMap_.find(handle);
     if (iter != connMap_.end()) {
         conn = iter->second;
+    }
+    return conn;
+}
+
+MsgConn* ImUser::GetMsgConn()
+{
+    MsgConn* conn = nullptr;
+    auto iter = connMap_.begin();
+    for (; iter != connMap_.end(); ++iter) {
+        return iter->second;
     }
     return conn;
 }

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2018-2019, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -40,6 +40,7 @@ public:
 private:
     void HandleLoginRequest(std::shared_ptr<ImPdu> pdu);
     void HandleBuddyListAllUserRequest(std::shared_ptr<ImPdu> pdu);
+    void HandleClientMsgData(std::shared_ptr<ImPdu> pdu);
 
 private:
     std::string loginName_;

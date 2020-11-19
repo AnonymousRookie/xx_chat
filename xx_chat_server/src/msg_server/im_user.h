@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2018-2019, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -30,6 +30,7 @@ public:
 
     user_conn_t GetUserConn();
     MsgConn* GetMsgConn(uint32_t handle);
+    MsgConn* GetMsgConn();
 
     void AddMsgConn(uint32_t handle, MsgConn* conn) { connMap_[handle] = conn; }
     bool IsMsgConnEmpty() { return connMap_.empty(); }

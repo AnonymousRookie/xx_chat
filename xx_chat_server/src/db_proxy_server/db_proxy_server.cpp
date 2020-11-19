@@ -11,6 +11,7 @@
 #include "config_file_reader.h"
 #include "db_pool.h"
 #include "proxy_conn.h"
+#include "string_util.h"
 
 #ifdef _WIN32
     #pragma comment(lib, "protobuf-lite.lib")
@@ -35,12 +36,16 @@ int main(int argc, char** argv)
     signal(SIGPIPE, SIG_IGN);
 #endif
 
-    Logger::GetInstance().SetFileBaseName("db_proxy_server");
+    std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
+
+    Logger::GetInstance().SetFileBaseName((path + "\\log\\db_proxy_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader("db_proxy_server.json");
+    ConfigFileReader configFileReader(path + "\\db_proxy_server.json");
     auto& dom = configFileReader.GetDom();
+
+    LOG_INFO(path.c_str());
 
     auto& db_proxy_server = dom["db_proxy_server"];
     std::string listenIp = db_proxy_server["listen_ip"].GetString();

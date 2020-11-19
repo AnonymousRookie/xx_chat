@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2018-2019, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -12,6 +12,7 @@
 #include "im.server.pb.h"
 #include "im.login.pb.h"
 #include "im.buddy.pb.h"
+#include "im.message.pb.h"
 #include "im_pdu_base.h"
 #include "db_server_conn.h"
 #include "im_user.h"
@@ -178,6 +179,9 @@ void DBServConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
     case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_RSP:
         HandleBuddyListAllUserResponse(pdu);
         break;
+    case im::base::MessageCmdID::CID_MSG_DATA:
+        HandleSessionMsg(pdu);
+        break;
     default:
         LOG_WARN("DBServConn unknown cmd id=%d", pdu->GetCommandId());
         break;
@@ -280,5 +284,29 @@ void DBServConn::HandleBuddyListAllUserResponse(std::shared_ptr<ImPdu> pdu)
         allUserRsp.clear_attach_data();
         pdu->SetPBMsg(&allUserRsp);
         msgConn->SendPdu(pdu);
+    }
+}
+
+void DBServConn::HandleSessionMsg(std::shared_ptr<ImPdu> pdu)
+{
+    im::message::MsgData msgData;
+    msgData.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
+
+    uint32_t userId = msgData.to();
+    LOG_WARN("HandleSessionMsg from:%d to:%d", msgData.from(), userId);
+
+    ImUser* imUser = ImUserManager::GetInstance()->GetImUserById(userId);
+    if (!imUser) {
+        LOG_WARN("ImUser for userId:%d not exist or offline!", userId);
+        return;
+    }
+
+    MsgConn* msgConn = imUser->GetMsgConn();
+    if (msgConn && msgConn->IsOpen()) {
+        msgConn->SendPdu(pdu);
+    }
+    else {
+        LOG_WARN("msgConn not exist or offline!");
+        return;
     }
 }

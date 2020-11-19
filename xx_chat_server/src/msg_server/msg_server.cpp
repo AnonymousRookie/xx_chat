@@ -15,6 +15,7 @@
 #include "route_server_conn.h"
 #include "msg_conn.h"
 #include "serv_info.h"
+#include "string_util.h"
 
 #define DEFAULT_CONCURRENT_DB_COUNT_CNT 10
 
@@ -40,11 +41,13 @@ int main(int argc, char** argv)
     signal(SIGPIPE, SIG_IGN);
 #endif
 
-    Logger::GetInstance().SetFileBaseName("msg_server");
+    std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
+
+    Logger::GetInstance().SetFileBaseName((path + "\\log\\msg_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader("msg_server.json");
+    ConfigFileReader configFileReader(path + "\\msg_server.json");
     auto& dom = configFileReader.GetDom();
     
     // 监听client的连接

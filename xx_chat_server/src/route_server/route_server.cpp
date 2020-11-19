@@ -11,7 +11,7 @@
 #include "net_lib.h"
 #include "config_file_reader.h"
 #include "route_conn.h"
-
+#include "string_util.h"
 
 #ifdef _WIN32
     #pragma comment(lib, "protobuf-lite.lib")
@@ -36,11 +36,13 @@ int main(int argc, char** argv)
     signal(SIGPIPE, SIG_IGN);
 #endif
 
-    Logger::GetInstance().SetFileBaseName("route_server");
+    std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
+
+    Logger::GetInstance().SetFileBaseName((path + "\\log\\route_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader("route_server.json");
+    ConfigFileReader configFileReader(path + "\\route_server.json");
     auto& dom = configFileReader.GetDom();
     auto& route_server_info = dom["route_server_info"];
 

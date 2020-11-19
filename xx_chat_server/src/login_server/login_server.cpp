@@ -12,6 +12,7 @@
 #include "config_file_reader.h"
 #include "login_conn.h"
 #include "http_conn.h"
+#include "string_util.h"
 
 #ifdef _WIN32
     #pragma comment(lib, "protobuf-lite.lib")
@@ -57,11 +58,13 @@ int main(int argc, char** argv)
     signal(SIGPIPE, SIG_IGN);
 #endif
 
-    Logger::GetInstance().SetFileBaseName("login_server");
+    std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
+
+    Logger::GetInstance().SetFileBaseName((path + "\\log\\login_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader("login_server.json");
+    ConfigFileReader configFileReader(path + "\\login_server.json");
     auto& dom = configFileReader.GetDom();
     auto& server_for_client_conn = dom["server_for_client_conn"];
     auto& server_for_http_client_conn = dom["server_for_http_client_conn"];

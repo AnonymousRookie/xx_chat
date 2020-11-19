@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2018-2019, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -11,6 +11,7 @@
 #include "im.login.pb.h"
 #include "im.server.pb.h"
 #include "im.buddy.pb.h"
+#include "im.message.pb.h"
 #include "utils.h"
 #include "msg_conn.h"
 #include "im_pdu_base.h"
@@ -117,6 +118,9 @@ void MsgConn::HandlePdu(std::shared_ptr<ImPdu> pdu)
     case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_REQ:
         HandleBuddyListAllUserRequest(pdu);
         break;
+    case im::base::MessageCmdID::CID_MSG_DATA:
+        HandleClientMsgData(pdu);
+        break;
     default:
         LOG_WARN("MsgConn recv 未知消息: %d", pdu->GetCommandId());
         break;
@@ -200,6 +204,20 @@ void MsgConn::HandleBuddyListAllUserRequest(std::shared_ptr<ImPdu> pdu)
         AttachData attachData(attachDataType_Handle, handle_, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attachData.GetBuffer(), attachData.GetLength());
+        pdu->SetPBMsg(&msg);
+        dbconn->SendPdu(pdu);
+    }
+}
+
+void MsgConn::HandleClientMsgData(std::shared_ptr<ImPdu> pdu)
+{
+    im::message::MsgData msg;
+    msg.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
+
+    LOG_INFO("HandleClientMsgData, from=%d, to=%d", msg.from(), msg.to());
+
+    DBServConnPtr dbconn = get_db_serv_conn();
+    if (dbconn) {
         pdu->SetPBMsg(&msg);
         dbconn->SendPdu(pdu);
     }
