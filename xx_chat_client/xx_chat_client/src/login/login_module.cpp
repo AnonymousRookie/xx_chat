@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -65,11 +65,11 @@ void LoginModule::NotifyLoginDone(std::shared_ptr<ImPdu> pdu)
     bool ret = loginRes.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
     Z_CHECK(ret);
 
-    // Í¨Öª·þÎñÆ÷¿Í»§¶Ë³õÊ¼»¯Íê±Ï
+    // é€šçŸ¥æœåŠ¡å™¨å®¢æˆ·ç«¯åˆå§‹åŒ–å®Œæ¯•
     z::core::GetOperationManager()->StartOperationWithLambda(
         [=] 
     {
-        // »ñÈ¡ºÃÓÑÐÅÏ¢
+        // èŽ·å–å¥½å‹ä¿¡æ¯
         im::buddy::AllUserReq allUserReq;
         allUserReq.set_user_id(loginRes.user_info().user_id());
         z::core::GetTcpClientModule()->SendPacket(im::base::ServiceID::SID_BUDDY_LIST,

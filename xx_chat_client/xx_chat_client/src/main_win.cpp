@@ -13,18 +13,40 @@
 #include "protocol\im.base.pb.h"
 #include "network\im_pdu_base.h"
 #include "util\string_util.h"
+#include "chat\chat_dlg_manager.h"
+#include "data_manager.h"
 
 MainWin::MainWin(QWidget *parent /*= Q_NULLPTR*/)
     : QWidget(parent)
 {
     ui.setupUi(this);
+    ui.treeWidget_contacts->setHeaderHidden(true);
+    ui.treeWidget_contacts->clear();
+
+    connect(ui.treeWidget_contacts, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this,
+        SLOT(OnItemDoubleClicked(QTreeWidgetItem*, int)));
+
     z::login::GetLoginModule()->AddObserver(this);
     z::user_list::GetUserListModule()->AddObserver(this);
 }
 
 MainWin::~MainWin()
 {
+    for (auto item : treeWidgetItems_)
+    {
+        if (item) {
+            delete item;
+            item = NULL;
+        }
+    }
+}
 
+void MainWin::OnItemDoubleClicked(QTreeWidgetItem* item, int i)
+{
+    Z_CHECK(item);
+    auto& name = item->text(i);
+
+    ChatDlgManager::Instance()->OpenFriendChatDlg(name);
 }
 
 void MainWin::OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu)
@@ -49,6 +71,8 @@ void MainWin::OnLoginDone(std::shared_ptr<ImPdu> pdu)
     bool ret = loginRes.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
     Z_CHECK(ret);
     ui.userNameLabel->setText(z::utils::str2qstr(loginRes.user_info().user_name()));
+    uint32_t userId = loginRes.user_info().user_id();
+    DataManager::GetInstance()->SetCurLoginUserId(userId);
 }
 
 void MainWin::OnFriendList(std::shared_ptr<ImPdu> pdu)
@@ -61,7 +85,11 @@ void MainWin::OnFriendList(std::shared_ptr<ImPdu> pdu)
     uint32_t userCnt = allUserRsp.user_info_list_size();
     for (uint32_t i = 0; i < userCnt; ++i) {
         auto& userInfo = allUserRsp.user_info_list(i);
-        userInfo.user_id();
-        userInfo.user_name();
+
+        DataManager::GetInstance()->AddUserInfo(UserInfo(userInfo.user_id(), userInfo.user_name()));
+
+        QTreeWidgetItem* treeWidgetItem = new QTreeWidgetItem(ui.treeWidget_contacts);
+        treeWidgetItems_.push_back(treeWidgetItem);
+        treeWidgetItem->setText(0, z::utils::str2qstr(userInfo.user_name()));
     }
 }

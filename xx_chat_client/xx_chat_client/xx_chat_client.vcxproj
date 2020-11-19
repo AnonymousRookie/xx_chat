@@ -66,7 +66,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>.\src;..\;..\base\src;$(SolutionDir)\thirdparty\pb\include;$(SolutionDir)\thirdparty\curl\include;$(SolutionDir)\thirdparty\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;..\;..\base\src;$(SolutionDir)\thirdparty\pb\include;$(SolutionDir)\thirdparty\curl\include;$(SolutionDir)\thirdparty\rapidjson\include;$(SolutionDir)\xx_chat_client\src\ui_dialog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>$(Qt_DEFINES_);BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -91,9 +91,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="xx_chat_client.qrc" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="src\chat\chat_dlg_manager.cpp" />
+    <ClCompile Include="src\chat\friend_chat_dlg.cpp" />
+    <ClCompile Include="src\chat\session_module.cpp" />
     <ClCompile Include="src\core\event.cpp" />
     <ClCompile Include="src\core\event_manager.cpp" />
     <ClCompile Include="src\core\http_client.cpp" />
@@ -105,30 +105,35 @@
     <ClCompile Include="src\core\operation.cpp" />
     <ClCompile Include="src\core\operation_manager.cpp" />
     <ClCompile Include="src\core\tcp_client_module.cpp" />
+    <ClCompile Include="src\data_manager.cpp" />
     <ClCompile Include="src\login\login_http_server_operation.cpp" />
     <ClCompile Include="src\login\login_module.cpp" />
     <ClCompile Include="src\login\login_operation.cpp" />
     <ClCompile Include="src\login\login_win.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_win.cpp" />
+    <ClCompile Include="src\message\message_entity.cpp" />
     <ClCompile Include="src\protocol\im.base.pb.cc" />
     <ClCompile Include="src\protocol\im.buddy.pb.cc" />
     <ClCompile Include="src\protocol\im.login.pb.cc" />
     <ClCompile Include="src\protocol\im.message.pb.cc" />
     <ClCompile Include="src\protocol\im.other.pb.cc" />
     <ClCompile Include="src\protocol\im.server.pb.cc" />
+    <ClCompile Include="src\ui_dialog\basedwidget\basedstyleshetwidget.cpp" />
+    <ClCompile Include="src\ui_dialog\basedwidget\basedwidget.cpp" />
+    <ClCompile Include="src\ui_dialog\basedwidget\imagebutton.cpp" />
+    <ClCompile Include="src\ui_dialog\basedwidget\LoadingDialog.cpp" />
+    <ClCompile Include="src\ui_dialog\basedwidget\PopupWidget.cpp" />
     <ClCompile Include="src\user_list\user_list_module.cpp" />
     <ClCompile Include="src\xx_chat.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="ui\login_win.ui" />
-    <QtUic Include="ui\main_win.ui" />
-    <QtUic Include="ui\xx_chat_client.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\login\login_win.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="src\chat\chat_dlg_manager.h" />
+    <QtMoc Include="src\chat\friend_chat_dlg.h" />
+    <ClInclude Include="src\chat\session_module.h" />
     <ClInclude Include="src\core\event.h" />
     <QtMoc Include="src\xx_chat.h" />
     <QtMoc Include="src\core\event_manager.h" />
@@ -141,17 +146,39 @@
     <ClInclude Include="src\core\operation.h" />
     <ClInclude Include="src\core\operation_manager.h" />
     <ClInclude Include="src\core\tcp_client_module.h" />
+    <ClInclude Include="src\data_manager.h" />
     <ClInclude Include="src\login\login_http_server_operation.h" />
     <ClInclude Include="src\login\login_module.h" />
     <ClInclude Include="src\login\login_operation.h" />
     <QtMoc Include="src\main_win.h" />
+    <ClInclude Include="src\message\message_entity.h" />
     <ClInclude Include="src\protocol\im.base.pb.h" />
     <ClInclude Include="src\protocol\im.buddy.pb.h" />
     <ClInclude Include="src\protocol\im.login.pb.h" />
     <ClInclude Include="src\protocol\im.message.pb.h" />
     <ClInclude Include="src\protocol\im.other.pb.h" />
     <ClInclude Include="src\protocol\im.server.pb.h" />
+    <QtMoc Include="src\ui_dialog\basedwidget\basedstyleshetwidget.h" />
+    <QtMoc Include="src\ui_dialog\basedwidget\basedwidget.h" />
+    <QtMoc Include="src\ui_dialog\basedwidget\imagebutton.h" />
+    <QtMoc Include="src\ui_dialog\basedwidget\LoadingDialog.h" />
+    <QtMoc Include="src\ui_dialog\basedwidget\PopupWidget.h" />
     <ClInclude Include="src\user_list\user_list_module.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Resources\ui\friend_chat_dlg.ui" />
+    <QtUic Include="Resources\ui\loading_dialog.ui" />
+    <QtUic Include="Resources\ui\login_win.ui" />
+    <QtUic Include="Resources\ui\main_win.ui" />
+    <QtUic Include="Resources\ui\xx_chat_client.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\ui\xx_chat_client.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qm\xx_chat_client_en.ts" />
+    <None Include="Resources\qm\xx_chat_client_zh.ts" />
+    <None Include="Resources\qss\default.qss" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

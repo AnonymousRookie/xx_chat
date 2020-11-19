@@ -17,6 +17,7 @@ enum EventId {
     EventId_Invalid = 0,
     EventId_LoginDone,
     EventId_FriendList,
+    EventId_MsgData,
 };
 
 NAMESPACE_BEGIN(z)

@@ -8,9 +8,12 @@
 #pragma once
 
 #include <QWidget>
+#include <QTreeWidgetItem>
 #include "ui_main_win.h"
 #include "core\module_observer.h"
 #include "core\event.h"
+
+class ItemModel;
 
 class MainWin : public QWidget, public z::core::ModuleObserver
 {
@@ -20,6 +23,9 @@ public:
     MainWin(QWidget *parent = Q_NULLPTR);
     ~MainWin();
 
+private slots:
+    void OnItemDoubleClicked(QTreeWidgetItem* item, int i);
+
 private:
     void OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu);
     void OnLoginDone(std::shared_ptr<ImPdu> pdu);
@@ -27,4 +33,5 @@ private:
 
 private:
     Ui::MainWin ui;
+    std::vector<QTreeWidgetItem*> treeWidgetItems_;
 };

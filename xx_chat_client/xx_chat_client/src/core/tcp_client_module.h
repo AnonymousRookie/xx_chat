@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -35,7 +35,7 @@ public:
         const std::string& password,
         std::function<void(std::shared_ptr<void>)> loginDoneCallback) = 0;
 
-    // ·¢ËÍĞ­Òé°ü
+    // å‘é€åè®®åŒ…
     virtual void SendPacket(ImPdu* pdu) {}
     virtual void SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg) = 0;
 };

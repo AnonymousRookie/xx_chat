@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -34,8 +34,8 @@ public:
     int StartOperationWithLambda(std::function<void()> operationRun, int32_t delay = 0);
 
 private:
-    std::list<std::shared_ptr<Operation>> delayOperations_;     // ÑÓÊ±´¦ÀíµÄ²Ù×÷
-    std::list<std::shared_ptr<Operation>> realtimeOperations_;  // ÊµÊ±´¦ÀíµÄ²Ù×÷
+    std::list<std::shared_ptr<Operation>> delayOperations_;     // å»¶æ—¶å¤„ç†çš„æ“ä½œ
+    std::list<std::shared_ptr<Operation>> realtimeOperations_;  // å®æ—¶å¤„ç†çš„æ“ä½œ
 
     std::mutex cvMutex_;
     std::condition_variable cv_;

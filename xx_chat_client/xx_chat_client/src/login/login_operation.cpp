@@ -1,8 +1,8 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
- * Description: Á¬½Ómsg_server
+ * Description: è¿žæŽ¥msg_server
  */
 
 #include <functional>
@@ -27,7 +27,7 @@ LoginOperation::~LoginOperation()
 
 void LoginOperation::ProcessOperation()
 {
-    // Á¬½Ómsg_server
+    // è¿žæŽ¥msg_server
     std::string ip = "";
     uint16_t port = 0;
     z::core::GetTcpClientModule()->DoLogin(loginParam_.msgServerIp,

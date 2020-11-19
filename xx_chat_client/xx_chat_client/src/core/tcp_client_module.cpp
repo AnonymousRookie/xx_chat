@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -14,6 +14,7 @@
 #include "..\login\login_module.h"
 #include "..\login\login_operation.h"
 #include "..\user_list\user_list_module.h"
+#include "..\chat\session_module.h"
 #include "tcp_client_module.h"
 #include "operation.h"
 #include "operation_manager.h"
@@ -183,6 +184,9 @@ void TcpClientModule::HandlePackets(std::shared_ptr<ImPdu> pdu)
     switch (pdu->GetCommandId()) {
     case im::base::BuddyListCmdID::CID_BUDDY_LIST_ALL_USER_RSP:
         pModule = z::user_list::GetUserListModule();
+        break;
+    case im::base::MessageCmdID::CID_MSG_DATA:
+        pModule = z::session::GetSessionModule();
         break;
     default:
         break;

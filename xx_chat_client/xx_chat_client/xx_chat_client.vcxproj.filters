@@ -6,24 +6,11 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{a26c7e6e-fe06-4965-8826-65e991a9663c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ui">
-      <UniqueIdentifier>{b66379af-6922-48a6-b606-5c10f56e855a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\login">
       <UniqueIdentifier>{96501ca5-6d39-4971-a9d4-1207c40ff61d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-      <ParseFiles>true</ParseFiles>
     </Filter>
     <Filter Include="src\core">
       <UniqueIdentifier>{c2336a1f-3c90-415a-81dd-266864ebb917}</UniqueIdentifier>
@@ -34,11 +21,30 @@
     <Filter Include="src\user_list">
       <UniqueIdentifier>{e726eb21-4564-4603-961b-fcd1b360a8a2}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="xx_chat_client.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
+    <Filter Include="src\chat">
+      <UniqueIdentifier>{2572890a-3507-404c-b81a-2737aacddbba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\message">
+      <UniqueIdentifier>{0b78d3bd-94db-401e-aa7f-7eba314bc26d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{b5d1fab9-2117-4f18-80e5-f18a888db82d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\qm">
+      <UniqueIdentifier>{f8cde63a-a3fe-411c-8993-0e33bea92c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\qss">
+      <UniqueIdentifier>{a9aa3b77-b9cd-4df1-9668-1aab76d2f038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\ui">
+      <UniqueIdentifier>{95ff2458-a124-4e1c-95de-5bc1a7cdb3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui_dialog">
+      <UniqueIdentifier>{7967c8b2-7058-4d6d-88da-adc00fa684d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui_dialog\basedwidget">
+      <UniqueIdentifier>{5d311dc1-1cfe-469c-9f6b-1d031233860b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -116,6 +122,36 @@
     <ClCompile Include="src\core\event.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\chat\chat_dlg_manager.cpp">
+      <Filter>src\chat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\chat\friend_chat_dlg.cpp">
+      <Filter>src\chat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\message\message_entity.cpp">
+      <Filter>src\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui_dialog\basedwidget\basedstyleshetwidget.cpp">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui_dialog\basedwidget\basedwidget.cpp">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui_dialog\basedwidget\imagebutton.cpp">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui_dialog\basedwidget\LoadingDialog.cpp">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui_dialog\basedwidget\PopupWidget.cpp">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\chat\session_module.cpp">
+      <Filter>src\chat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\login\login_win.h">
@@ -130,17 +166,27 @@
     <QtMoc Include="src\xx_chat.h">
       <Filter>src</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="ui\login_win.ui">
-      <Filter>ui</Filter>
-    </QtUic>
-    <QtUic Include="ui\xx_chat_client.ui">
-      <Filter>ui</Filter>
-    </QtUic>
-    <QtUic Include="ui\main_win.ui">
-      <Filter>ui</Filter>
-    </QtUic>
+    <QtMoc Include="src\chat\chat_dlg_manager.h">
+      <Filter>src\chat</Filter>
+    </QtMoc>
+    <QtMoc Include="src\chat\friend_chat_dlg.h">
+      <Filter>src\chat</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ui_dialog\basedwidget\basedstyleshetwidget.h">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ui_dialog\basedwidget\basedwidget.h">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ui_dialog\basedwidget\imagebutton.h">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ui_dialog\basedwidget\LoadingDialog.h">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ui_dialog\basedwidget\PopupWidget.h">
+      <Filter>src\ui_dialog\basedwidget</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\operation_manager.h">
@@ -203,5 +249,47 @@
     <ClInclude Include="src\core\event.h">
       <Filter>src\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\message\message_entity.h">
+      <Filter>src\message</Filter>
+    </ClInclude>
+    <ClInclude Include="src\chat\session_module.h">
+      <Filter>src\chat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_manager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Resources\ui\friend_chat_dlg.ui">
+      <Filter>Resources\ui</Filter>
+    </QtUic>
+    <QtUic Include="Resources\ui\login_win.ui">
+      <Filter>Resources\ui</Filter>
+    </QtUic>
+    <QtUic Include="Resources\ui\main_win.ui">
+      <Filter>Resources\ui</Filter>
+    </QtUic>
+    <QtUic Include="Resources\ui\xx_chat_client.ui">
+      <Filter>Resources\ui</Filter>
+    </QtUic>
+    <QtUic Include="Resources\ui\loading_dialog.ui">
+      <Filter>Resources\ui</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\ui\xx_chat_client.qrc">
+      <Filter>Resources\ui</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qm\xx_chat_client_en.ts">
+      <Filter>Resources\qm</Filter>
+    </None>
+    <None Include="Resources\qm\xx_chat_client_zh.ts">
+      <Filter>Resources\qm</Filter>
+    </None>
+    <None Include="Resources\qss\default.qss">
+      <Filter>Resources\qss</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
- * Description: µÇÂ¼½çÃæ
+ * Description: ç™»å½•ç•Œé¢
  */
 
 #include <string>
@@ -27,6 +27,7 @@ LoginWin::LoginWin(QWidget *parent)
     ui.setupUi(this);
     connect(ui.pushButton_login, SIGNAL(clicked()), this, SLOT(DoLogin()));
     this->show();
+    z::login::GetLoginModule()->AddObserver(this);
 }
 
 LoginWin::~LoginWin()
@@ -47,7 +48,7 @@ void LoginWin::DoLogin()
     username_ = z::utils::qStr2Str(ui.comboBox_username->currentText());
     password_ = z::utils::qStr2Str(ui.lineEdit_password->text());
 
-    // Á¬½Ólogin_server
+    // è¿æ¥login_server
     DoLoginServerParam param;
     auto operation = std::make_shared<LoginHttpServerOperation>(
         std::bind(&LoginWin::OnHttpLoginCallback, this, std::placeholders::_1), param);
@@ -58,12 +59,12 @@ void LoginWin::OnHttpLoginCallback(std::shared_ptr<void> param)
 {
     DoLoginServerParam* pParam = (DoLoginServerParam*)param.get();
 
-    // Á¬½Ólogin_server³É¹¦
+    // è¿æ¥login_serveræˆåŠŸ
     if (LOGIN_LOGIN_SERVER_SUCCESS == pParam->result)
     {
-        LOG_INFO("%sÁ¬½Ólogin_server³É¹¦!", username_.c_str());
+        LOG_INFO("%sè¿æ¥login_serveræˆåŠŸ!", username_.c_str());
 
-        // ¿ªÊ¼Á¬½Ómsg_server
+        // å¼€å§‹è¿æ¥msg_server
         LoginMsgServerParam loginParam;
         loginParam.username = username_;
         loginParam.password = password_;
@@ -76,14 +77,23 @@ void LoginWin::OnHttpLoginCallback(std::shared_ptr<void> param)
     }
     else
     {
-        // Á¬½Ólogin_serverÊ§°Ü
-        LOG_WARN("%sÁ¬½Ólogin_serverÊ§°Ü!", username_.c_str());
+        // è¿æ¥login_serverå¤±è´¥
+        LOG_WARN("%sè¿æ¥login_serverå¤±è´¥!", username_.c_str());
     }
 }
 
 void LoginWin::OnOperationCallback(std::shared_ptr<void> param)
 {
 
+}
+
+void LoginWin::OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu)
+{
+    // ç™»å½•æˆåŠŸ, éšè—ç™»å½•çª—å£
+    if (EventId_LoginDone == eventId)
+    {
+        hide();
+    }
 }
 
 NAMESPACE_END(login)

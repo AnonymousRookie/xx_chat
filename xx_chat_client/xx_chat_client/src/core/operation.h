@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Copyright 2019-2020, AnonymousRookie. All rights reserved.
  * https://github.com/AnonymousRookie/xx_chat
  * Author: AnonymousRookie (357688981 at qq dot com)
@@ -19,7 +19,7 @@ NAMESPACE_BEGIN(core)
 
 typedef std::function<void(std::shared_ptr<void>)> OperationDelegate;
 
-// Òì²½²Ù×÷Ö´ĞĞµ¥Î»
+// å¼‚æ­¥æ“ä½œæ‰§è¡Œå•ä½
 struct IOperation
 {
 public:
@@ -85,7 +85,7 @@ private:
 class IPduPacketParse
 {
 public:
-    // ÊÕµ½TcpClientÍøÂç°üÖ®ºóµÄ»Øµ÷½Ó¿Ú
+    // æ”¶åˆ°TcpClientç½‘ç»œåŒ…ä¹‹åçš„å›è°ƒæ¥å£
     virtual void OnPacket(std::shared_ptr<ImPdu> pdu) = 0;
 };
 
