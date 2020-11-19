@@ -1,0 +1,223 @@
+﻿/**************************** QWidget ****************************/
+
+
+QWidget#BodyWidget {
+    background-color:#14222D;
+}
+
+QWidget#PopupWidgetTitle {
+    background-color:#1090D6;
+}
+
+QWidget[type="PopUpWidget"] {
+    background-color:#012C6A;
+}
+
+
+
+/**************************** QLabel ****************************/
+
+
+/**************************** QCheckBox ****************************/
+
+QCheckBox {
+    color:white;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+}
+
+QCheckBox::indicator
+{     
+     width: 14px;
+     height:14px;     
+}
+
+QCheckBox::indicator:!checked
+{
+    border-image:url(:/checkbox/checkbox_normal) 0 0 0 0 stretch stretch;
+}
+
+QCheckBox::indicator:hover:!checked
+{
+    border-image:url(:/checkbox/checkbox_hover) 0 0 0 0 stretch stretch;
+}
+
+QCheckBox::indicator:checked
+{
+    border-image:url(:/checkbox/checkbox_selected_normal) 0 0 0 0 stretch stretch;
+}
+
+QCheckBox::indicator:checked:hover
+{
+    border-image:url(:/checkbox/checkbox_selected_hover) 0 0 0 0 stretch stretch;
+}
+
+/**************************** QPushButton ****************************/
+QPushButton {
+    color: white;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    background-color:#003B90;
+}
+
+QPushButton:hover {
+    color: white;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    background-color:#11ABFF;
+}
+
+QPushButton:pressed {
+    color: white;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    background-color:#003B90;
+}
+
+
+/**************************** QHeaderView ****************************/
+QHeaderView {
+    background:transparent; 
+}
+
+QHeaderView::section {
+    font-size:14px;
+    font-family:"Microsoft YaHei";
+    color:#FFFFFF; 
+ 
+    background:#012D5B; 
+    border:none; 
+
+    min-height:50px;
+    max-height:50px;
+ 
+    margin-left:0px;
+    padding-left:0px;
+}
+
+
+/**************************** QTableWidget ****************************/
+QTableWidget {
+    background:#012447;
+    border:none;
+    font-size:14px;
+    font-family:"Microsoft YaHei";
+    color:#FFFFFF;
+}
+
+QTableWidget::item {
+    border-bottom:1px solid #012D5B;
+}
+
+QTableWidget::item::selected {
+    color:#FFFFFF;
+    background:#0B6FAB;
+    border-bottom:1px solid #012D5B;
+}
+
+
+/**************************** QScrollBar ****************************/
+QScrollBar:vertical {
+    width:8px;
+    background:rgba(30,144,255,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:9px;
+    padding-bottom:9px;
+}
+
+QScrollBar::handle:vertical {
+    width:8px;
+    background:rgba(30,144,255,25%);
+    border-radius:4px;
+    min-height:20;
+}
+
+QScrollBar::handle:vertical:hover {
+    width:8px;
+    background:rgba(30,144,255,50%);
+    border-radius:4px;
+    min-height:20;
+}
+
+QScrollBar::add-line:vertical {
+    height:9px;width:8px;
+    border-image:url(:/scrollbar/3);
+    subcontrol-position:bottom;
+}
+
+QScrollBar::sub-line:vertical {
+    height:9px;width:8px;
+    border-image:url(:/scrollbar/1);
+    subcontrol-position:top;
+}
+
+QScrollBar::add-line:vertical:hover {
+    height:9px;width:8px;
+    border-image:url(:/scrollbar/4);
+    subcontrol-position:bottom;
+}
+
+QScrollBar::sub-line:vertical:hover {
+    height:9px;width:8px;
+    border-image:url(:/scrollbar/2);
+    subcontrol-position:top;
+}
+
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical {
+    background:rgba(30,144,255,10%);
+    border-radius:4px;
+}
+
+QScrollBar:horizontal {
+    height:8px;
+    background:rgba(30,144,255,0%);
+    margin:0px,0px,0px,0px;
+    padding-left:9px;
+    padding-right:9px;
+}
+
+QScrollBar::handle:horizontal {
+    height:8px;
+    background:rgba(30,144,255,25%);
+    border-radius:4px;
+    min-height:20;
+}
+
+QScrollBar::handle:horizontal:hover {
+    height:8px;
+    background:rgba(30,144,255,50%);
+    border-radius:4px;
+    min-height:20;
+}
+
+QScrollBar::add-line:horizontal {
+    width:9px;height:8px;
+    border-image:url(:/scrollbar/7);
+    subcontrol-position:right;
+}
+
+QScrollBar::sub-line:horizontal {
+    width:9px;height:8px;
+    border-image:url(:/scrollbar/5);
+    subcontrol-position:left;
+}
+
+QScrollBar::add-line:horizontal:hover {
+    width:9px;height:8px;
+    border-image:url(:/scrollbar/8);
+    subcontrol-position:right;
+}
+
+QScrollBar::sub-line:horizontal:hover {
+    width:9px;height:8px;
+    border-image:url(:/scrollbar/6);
+    subcontrol-position:left;
+}
+
+QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal {
+    background:rgba(30,144,255,10%);
+    border-radius:4px;
+}
+
+/**************************** XXX ****************************/
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoadingDialog</class>
+ <widget class="QDialog" name="LoadingDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>514</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <widget class="QLabel" name="label_text">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>320</y>
+     <width>341</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>努力加载中，请稍后...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_gif">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>80</y>
+     <width>211</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

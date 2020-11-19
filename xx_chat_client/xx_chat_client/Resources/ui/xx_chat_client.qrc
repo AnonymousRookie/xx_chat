@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="xx_chat">
+        <file alias="qss">../qss/default.qss</file>
+        <file alias="min">../images/min.png</file>
+        <file alias="max">../images/max.png</file>
+        <file alias="restore">../images/restore.png</file>
+        <file alias="close">../images/close.png</file>
+        <file alias="loading">../images/loading.gif</file>
+    </qresource>
+
+    <qresource prefix="checkbox">
+        <file alias="checkbox_hover">../images/checkbox/checkbox_hover.png</file>
+        <file alias="checkbox_normal">../images/checkbox/checkbox_normal.png</file>
+        <file alias="checkbox_press">../images/checkbox/checkbox_press.png</file>
+        <file alias="checkbox_selected_hover">../images/checkbox/checkbox_selected_hover.png</file>
+        <file alias="checkbox_selected_normal">../images/checkbox/checkbox_selected_normal.png</file>
+        <file alias="checkbox_selected_press">../images/checkbox/checkbox_selected_press.png</file>
+    </qresource>
+
+    <qresource prefix="qm">
+        <file alias="xx_chat_client_zh">../qm/xx_chat_client_zh.qm</file>
+        <file alias="xx_chat_client_en">../qm/xx_chat_client_en.qm</file>
+    </qresource>
+</RCC>
