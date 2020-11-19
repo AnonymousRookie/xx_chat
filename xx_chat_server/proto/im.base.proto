@@ -6,8 +6,8 @@ option optimize_for = LITE_RUNTIME;
 enum ServiceID {
     SID_UNKNOW = 0x0000;
     SID_LOGIN = 0x0001;       // for login
-    SID_BUDDY_LIST = 0x0003; // for friend list
-    SID_MSG = 0x0004;
+    SID_BUDDY_LIST = 0x0002;  // for friend list
+    SID_MSG = 0x0003;
     SID_OTHER = 0x0007;
 }
 
@@ -26,6 +26,11 @@ enum BuddyListCmdID {
     CID_BUDDY_LIST_UNKNOW = 0x00;
     CID_BUDDY_LIST_ALL_USER_REQ = 0x0201;
     CID_BUDDY_LIST_ALL_USER_RSP = 0x0202;
+}
+
+enum MessageCmdID {
+    CID_MSG_UNKNOW = 0x00;
+    CID_MSG_DATA = 0x0301;
 }
 
 enum OtherCmdID {

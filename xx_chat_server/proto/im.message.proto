@@ -2,3 +2,13 @@ syntax = "proto3";
 package im.message;
 import "im.base.proto";
 option optimize_for = LITE_RUNTIME;
+
+message MsgData {
+    uint32 from = 1;      // 消息发送方
+    uint32 to = 2;        // 消息接收方
+    uint32 msg_id = 3;
+    uint32 create_time = 4;
+    im.base.MsgType msg_type = 5;
+    bytes msg_data = 6;
+    bytes attach_data = 20;
+}
