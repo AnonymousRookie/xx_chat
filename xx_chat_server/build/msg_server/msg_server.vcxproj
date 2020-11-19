@@ -24,6 +24,7 @@
     <Platform>Win32</Platform>
     <ProjectName>msg_server</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -55,7 +56,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Personal\Projects\aliyun\xx_chat_server\build\run\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)run\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">msg_server.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">msg_server</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
@@ -82,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Personal\Projects\aliyun\xx_chat_server\src\..\thirdparty\pb\include;D:\Personal\Projects\aliyun\xx_chat_server\src\..\thirdparty\mariadb\include;D:\Personal\Projects\aliyun\xx_chat_server\src\..\thirdparty\http;D:\Personal\Projects\aliyun\xx_chat_server\src\..\thirdparty\rapidjson\include;D:\Personal\Projects\aliyun\xx_chat_server\src\..\thirdparty\pugixml\include;D:\Personal\Projects\aliyun\xx_chat_server\src\base;D:\Personal\Projects\aliyun\xx_chat_server\src\base\protocol;D:\Personal\Projects\aliyun\xx_chat_server\src\msg_server\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\thirdparty\pb\include;$(SolutionDir)..\thirdparty\mariadb\include;$(SolutionDir)..\thirdparty\http;$(SolutionDir)..\thirdparty\rapidjson\include;$(SolutionDir)..\thirdparty\pugixml\include;$(SolutionDir)..\src\base;$(SolutionDir)..\src\base\protocol;$(SolutionDir)..\src\msg_server\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
