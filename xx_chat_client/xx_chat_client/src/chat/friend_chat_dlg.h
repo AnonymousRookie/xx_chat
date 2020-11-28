@@ -30,6 +30,7 @@ private slots:
 
 private:
     void OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu);
+    void OnNotify(EventId eventId, void* data, uint32_t len);
     void OnMsgDataComming(std::shared_ptr<ImPdu> pdu);
 
 private:

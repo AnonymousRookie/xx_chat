@@ -30,7 +30,28 @@ void Event::Process()
     for (; iter != moduleObservers.end(); ++iter) {
         ModuleObserver* moduleObserver = *iter;
         moduleObserver->OnNotify(eventId_, pdu_);
+        moduleObserver->OnNotify(eventId_, (void*)buf_.GetBuffer(), buf_.GetWriteOffset());
     }
+}
+
+void Event::SetData(void* data, uint32_t len)
+{
+    buf_.Write(data, len);
+}
+
+TimerEvent::TimerEvent()
+{
+
+}
+
+TimerEvent::~TimerEvent()
+{
+
+}
+
+void TimerEvent::Process()
+{
+    callback_();
 }
 
 NAMESPACE_END(core)

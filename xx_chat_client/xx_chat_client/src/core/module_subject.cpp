@@ -47,6 +47,14 @@ void ModuleSubject::AsynNotifyObserver(EventId eventId, std::shared_ptr<ImPdu> p
     z::core::GetEventManager()->AsyncFireEvent(event);
 }
 
+void ModuleSubject::AsynNotifyObserver(EventId eventId, void* data, int len)
+{
+    Event* event = new Event(shared_from_this());
+    event->SetEventId(eventId);
+    event->SetData(data, len);
+    z::core::GetEventManager()->AsyncFireEvent(event);
+}
+
 std::vector<ModuleObserver*> ModuleSubject::GetModuleObservers()
 {
     std::lock_guard<std::mutex> lock(mutex_);

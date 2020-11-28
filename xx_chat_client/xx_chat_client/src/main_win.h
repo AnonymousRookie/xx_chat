@@ -28,8 +28,10 @@ private slots:
 
 private:
     void OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu);
+    void OnNotify(EventId eventId, void* data, uint32_t len);
     void OnLoginDone(std::shared_ptr<ImPdu> pdu);
     void OnFriendList(std::shared_ptr<ImPdu> pdu);
+    void OnTcpClientState(void* data, uint32_t len);
 
 private:
     Ui::MainWin ui;

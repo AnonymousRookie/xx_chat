@@ -29,6 +29,7 @@ public:
     void AddObserver(ModuleObserver* observer);
     void RemoveObserver(ModuleObserver* observer);
     void AsynNotifyObserver(EventId eventId, std::shared_ptr<ImPdu> pdu);
+    void AsynNotifyObserver(EventId eventId, void* data, int len);
     std::vector<ModuleObserver*> GetModuleObservers();
 
 private:

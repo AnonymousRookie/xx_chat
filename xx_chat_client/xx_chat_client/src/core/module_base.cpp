@@ -31,11 +31,15 @@ void ModuleBase::RemoveObserver(ModuleObserver* observer)
     moduleSubjectSptr_->RemoveObserver(observer);
 }
 
-void ModuleBase::AsynNotifyObserver(EventId keyId, std::shared_ptr<ImPdu> pdu)
+void ModuleBase::AsynNotifyObserver(EventId eventId, std::shared_ptr<ImPdu> pdu)
 {
-    moduleSubjectSptr_->AsynNotifyObserver(keyId, pdu);
+    moduleSubjectSptr_->AsynNotifyObserver(eventId, pdu);
 }
 
+void ModuleBase::AsynNotifyObserver(EventId eventId, void* data, int len)
+{
+    moduleSubjectSptr_->AsynNotifyObserver(eventId, data, len);
+}
 
 NAMESPACE_END(core)
 NAMESPACE_END(z)

@@ -71,6 +71,11 @@ void FriendChatDlg::OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu)
     }
 }
 
+void FriendChatDlg::OnNotify(EventId eventId, void* data, uint32_t len)
+{
+
+}
+
 void FriendChatDlg::OnMsgDataComming(std::shared_ptr<ImPdu> pdu)
 {
     im::message::MsgData msg;

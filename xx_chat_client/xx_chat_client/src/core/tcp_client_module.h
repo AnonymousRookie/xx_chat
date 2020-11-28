@@ -12,6 +12,7 @@
 #include "types.h"
 #include "network\im_pdu_base.h"
 #include "network\im_conn.h"
+#include "..\core\module_base.h"
 
 NAMESPACE_BEGIN(im)
 NAMESPACE_BEGIN(login)
@@ -25,7 +26,16 @@ NAMESPACE_END(im)
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(core)
 
-class ITcpClientModule
+enum TcpClientState 
+{
+    TcpClientState_Invalid = 0,
+    TcpClientState_Connected,
+    TcpClientState_DisConnected,
+};
+
+class TimerEvent;
+
+class ITcpClientModule : public z::core::ModuleBase
 {
 public:
     virtual net_handle_t DoLogin(
@@ -61,13 +71,19 @@ public:
     virtual void SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg);
 
     virtual void Close();
-    virtual void TimerCallback(uint8_t msg, uint32_t handle);
 
 public:
     virtual void OnConfirm();
     virtual void OnClose();
-    virtual void OnTimer(uint64_t currentTick);
     virtual void HandlePdu(std::shared_ptr<ImPdu> pdu);
+
+public:
+    // 定时发送心跳消息
+    void StartSendHeartBeatMsg();
+    void StopSendHeartBeatMsg();
+
+    uint8_t GetTcpClientState();
+    void SetTcpClientState(uint8_t state);
 
 private:
     void HandleLoginResponse(std::shared_ptr<ImPdu> pdu);
@@ -80,7 +96,10 @@ private:
     std::string username_;
     std::string password_;
 
+    uint8_t TcpClientState_ = TcpClientState_Invalid;
+
     LoginDoneCallback loginDoneCallback_;
+    std::shared_ptr<TimerEvent> timerEvent_ = nullptr;
 };
 
 

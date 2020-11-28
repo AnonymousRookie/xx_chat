@@ -18,6 +18,7 @@
 #include "tcp_client_module.h"
 #include "operation.h"
 #include "operation_manager.h"
+#include "event_manager.h"
 
 z::core::IPduPacketParse* getModule(uint16_t moduleId)
 {
@@ -95,7 +96,13 @@ void TcpClientModule::OnConfirm()
 
 void TcpClientModule::OnClose()
 {
+    LOG_WARN("TcpClientModule::OnClose()");
+
     Close();
+    StopSendHeartBeatMsg();
+
+    uint8_t state = TcpClientState_DisConnected;
+    AsynNotifyObserver(EventId_TcpClientState, (void*)&state, sizeof(state));
 }
 
 void TcpClientModule::Close()
@@ -103,24 +110,6 @@ void TcpClientModule::Close()
     if (handle_ != NETLIB_INVALID_HANDLE) {
         z::net::netlib_close(handle_);
         g_client_conn.erase(handle_);
-    }
-}
-
-void TcpClientModule::OnTimer(uint64_t currentTick)
-{
-    if (currentTick > lastSendTick_ + CLIENT_HEARTBEAT_INTERVAL) {
-        im::other::HeartBeat msg;
-        ImPdu pdu;
-        pdu.SetPBMsg(&msg);
-        pdu.SetServiceId(im::base::ServiceID::SID_OTHER);
-        pdu.SetCommandId(im::base::OtherCmdID::CID_OTHER_HEARTBEAT);
-        uint32_t seqNo = 0;
-        pdu.SetSeqNum(seqNo);
-        SendPdu(&pdu);
-    }
-    if (currentTick > lastRecvTick_ + CLIENT_TIMEOUT) {
-        LOG_WARN("connect to msg_server timeout!");
-        Close();
     }
 }
 
@@ -174,8 +163,7 @@ void TcpClientModule::HandleLoginResponse(std::shared_ptr<ImPdu> pdu)
     IPduPacketParse* pModule = z::login::GetLoginModule();
     pModule->OnPacket(pdu);
 
-    z::net::netlib_register_timer(std::bind(&TcpClientModule::TimerCallback, 
-        this, std::placeholders::_1, std::placeholders::_2), 100);
+    StartSendHeartBeatMsg();
 }
 
 void TcpClientModule::HandlePackets(std::shared_ptr<ImPdu> pdu)
@@ -195,12 +183,6 @@ void TcpClientModule::HandlePackets(std::shared_ptr<ImPdu> pdu)
     pModule->OnPacket(pdu);
 }
 
-void TcpClientModule::TimerCallback(uint8_t msg, uint32_t handle)
-{
-    uint64_t curTick = z::utils::GetTickCount();
-    OnTimer(curTick);
-}
-
 void TcpClientModule::SendPacket(uint16_t serviceId, uint16_t cmdId, google::protobuf::MessageLite* pbMsg)
 {
     ImPdu pdu;
@@ -210,6 +192,48 @@ void TcpClientModule::SendPacket(uint16_t serviceId, uint16_t cmdId, google::pro
     uint32_t seqNo = 0;
     pdu.SetSeqNum(seqNo);
     SendPdu(&pdu);
+}
+
+void TcpClientModule::StartSendHeartBeatMsg()
+{
+    if (!timerEvent_) {
+        timerEvent_ = std::make_shared<TimerEvent>();
+        timerEvent_->timerEventName_ = "TcpClientModule_HeartBeatMsg_Timer";
+        timerEvent_->interval_ = 500;
+    }
+
+    timerEvent_->callback_ = [&]() {
+        GetOperationManager()->StartOperationWithLambda(
+            [=]() 
+        {
+            im::other::HeartBeat msg;
+            ImPdu pdu;
+            pdu.SetPBMsg(&msg);
+            pdu.SetServiceId(im::base::ServiceID::SID_OTHER);
+            pdu.SetCommandId(im::base::OtherCmdID::CID_OTHER_HEARTBEAT);
+            uint32_t seqNo = 0;
+            pdu.SetSeqNum(seqNo);
+            SendPdu(&pdu);
+        }
+        );
+    };
+    
+    z::core::GetEventManager()->RegisterTimerEvent(timerEvent_);
+}
+
+void TcpClientModule::StopSendHeartBeatMsg()
+{
+    z::core::GetEventManager()->UnRegisterTimerEvent(timerEvent_);
+}
+
+uint8_t TcpClientModule::GetTcpClientState()
+{
+    return tcpClientState_;
+}
+
+void TcpClientModule::SetTcpClientState(uint8_t state)
+{
+    tcpClientState_ = state;
 }
 
 NAMESPACE_END(core)

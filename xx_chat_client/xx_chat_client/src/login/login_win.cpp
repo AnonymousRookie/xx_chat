@@ -17,6 +17,7 @@
 #include "login_operation.h"
 #include "login_win.h"
 #include "login_module.h"
+#include "data_manager.h"
 
 NAMESPACE_BEGIN(z)
 NAMESPACE_BEGIN(login)
@@ -71,6 +72,9 @@ void LoginWin::OnHttpLoginCallback(std::shared_ptr<void> param)
         loginParam.msgServerIp = pParam->msgServerIp;
         loginParam.msgServerPort = pParam->msgServerPort;
 
+        DataManager::GetInstance()->SetLoginUserInfo(loginParam.username, loginParam.password);
+        DataManager::GetInstance()->SetMsgServerInfo(loginParam.msgServerIp, loginParam.msgServerPort);
+
         auto pOperation = std::make_shared<LoginOperation>(
             std::bind(&LoginWin::OnOperationCallback, this, std::placeholders::_1), loginParam);
         z::core::GetOperationManager()->StartOperation(pOperation, 0);
@@ -94,6 +98,11 @@ void LoginWin::OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu)
     {
         hide();
     }
+}
+
+void LoginWin::OnNotify(EventId eventId, void* data, uint32_t len)
+{
+
 }
 
 NAMESPACE_END(login)

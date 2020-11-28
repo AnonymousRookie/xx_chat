@@ -67,7 +67,7 @@ void LoginModule::NotifyLoginDone(std::shared_ptr<ImPdu> pdu)
 
     // 通知服务器客户端初始化完毕
     z::core::GetOperationManager()->StartOperationWithLambda(
-        [=] 
+        [=] ()
     {
         // 获取好友信息
         im::buddy::AllUserReq allUserReq;

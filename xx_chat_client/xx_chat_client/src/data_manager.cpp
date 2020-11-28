@@ -56,3 +56,27 @@ bool DataManager::GetUserInfo(const std::string& userName, UserInfo& userInfo)
     }
     return false;
 }
+
+void DataManager::SetLoginUserInfo(const std::string& name, const std::string& passwd)
+{
+    loginName_ = name;
+    loginPasswd_ = passwd;
+}
+
+void DataManager::GetLoginUserInfo(std::string& name, std::string& passwd)
+{
+    name = loginName_;
+    passwd = loginPasswd_;
+}
+
+void DataManager::SetMsgServerInfo(const std::string& ip, const uint16_t& port)
+{
+    msgServerIp_ = ip;
+    msgServerPort_ = port;
+}
+
+void DataManager::GetMsgServerInfo(std::string& ip, uint16_t& port)
+{
+    ip = msgServerIp_;
+    port = msgServerPort_;
+}

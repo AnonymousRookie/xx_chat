@@ -18,6 +18,7 @@
 #include "util\string_util.h"
 #include "network\net_lib.h"
 #include "core\operation_manager.h"
+#include "core\event_manager.h"
 #include "xx_chat.h"
 
 #ifdef _WIN32
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
 
     z::net::netlib_start_event();
     z::core::GetOperationManager()->Startup();
+    z::core::GetEventManager()->Startup();
     XXChat::GetInstance()->Start();
 
     return a.exec();

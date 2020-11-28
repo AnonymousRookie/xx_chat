@@ -110,6 +110,7 @@
     <ClCompile Include="src\login\login_module.cpp" />
     <ClCompile Include="src\login\login_operation.cpp" />
     <ClCompile Include="src\login\login_win.cpp" />
+    <ClCompile Include="src\login\relogin_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_win.cpp" />
     <ClCompile Include="src\message\message_entity.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="src\login\login_module.h" />
     <ClInclude Include="src\login\login_operation.h" />
     <QtMoc Include="src\main_win.h" />
+    <ClInclude Include="src\login\relogin_manager.h" />
     <ClInclude Include="src\message\message_entity.h" />
     <ClInclude Include="src\protocol\im.base.pb.h" />
     <ClInclude Include="src\protocol\im.buddy.pb.h" />

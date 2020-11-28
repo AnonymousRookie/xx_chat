@@ -27,6 +27,7 @@ class ModuleObserver
 {
 public:
     virtual void OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu) = 0;
+    virtual void OnNotify(EventId eventId, void* data, uint32_t len) = 0;
 };
 
 NAMESPACE_END(core)

@@ -35,9 +35,21 @@ public:
     void AddUserInfo(UserInfo userInfo);
     bool GetUserInfo(const std::string& userName, UserInfo& userInfo);
 
+    void SetLoginUserInfo(const std::string& name, const std::string& passwd);
+    void GetLoginUserInfo(std::string& name, std::string& passwd);
+
+    void SetMsgServerInfo(const std::string& ip, const uint16_t& port);
+    void GetMsgServerInfo(std::string& ip, uint16_t& port);
+
 private:
     static std::shared_ptr<DataManager> instance_;
     uint32_t curLoginUserId_ = 0;
     std::vector<UserInfo> userInfos_;
+
+    std::string loginName_;
+    std::string loginPasswd_;
+
+    std::string msgServerIp_;
+    uint16_t msgServerPort_;
 };
 

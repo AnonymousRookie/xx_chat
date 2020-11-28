@@ -7,6 +7,7 @@
 
 #include "main_win.h"
 #include "login\login_module.h"
+#include "login\relogin_manager.h"
 #include "user_list\user_list_module.h"
 #include "protocol\im.login.pb.h"
 #include "protocol\im.buddy.pb.h"
@@ -15,6 +16,7 @@
 #include "util\string_util.h"
 #include "chat\chat_dlg_manager.h"
 #include "data_manager.h"
+#include "core\tcp_client_module.h"
 
 MainWin::MainWin(QWidget *parent /*= Q_NULLPTR*/)
     : QWidget(parent)
@@ -28,6 +30,7 @@ MainWin::MainWin(QWidget *parent /*= Q_NULLPTR*/)
 
     z::login::GetLoginModule()->AddObserver(this);
     z::user_list::GetUserListModule()->AddObserver(this);
+    z::core::GetTcpClientModule()->AddObserver(this);
 }
 
 MainWin::~MainWin()
@@ -64,6 +67,18 @@ void MainWin::OnNotify(EventId eventId, std::shared_ptr<ImPdu> pdu)
     }
 }
 
+void MainWin::OnNotify(EventId eventId, void* data, uint32_t len)
+{
+    switch (eventId)
+    {
+    case EventId_TcpClientState:
+        OnTcpClientState(data, len);
+        break;
+    default:
+        break;
+    }
+}
+
 void MainWin::OnLoginDone(std::shared_ptr<ImPdu> pdu)
 {
     this->show();
@@ -91,5 +106,19 @@ void MainWin::OnFriendList(std::shared_ptr<ImPdu> pdu)
         QTreeWidgetItem* treeWidgetItem = new QTreeWidgetItem(ui.treeWidget_contacts);
         treeWidgetItems_.push_back(treeWidgetItem);
         treeWidgetItem->setText(0, z::utils::str2qstr(userInfo.user_name()));
+    }
+}
+
+void MainWin::OnTcpClientState(void* data, uint32_t len)
+{
+    uint8_t state = z::core::TcpClientState_Invalid;
+    if (len >= sizeof(state))
+    {
+        state = *(uint8_t*)data;
+    }
+    if (z::core::TcpClientState_DisConnected == state)
+    {
+        // 发起重连
+        z::login::ReLoginManager::GetInstance()->DoReLogin();
     }
 }

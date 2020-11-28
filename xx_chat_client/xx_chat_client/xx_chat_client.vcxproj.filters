@@ -152,6 +152,9 @@
     <ClCompile Include="src\data_manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\login\relogin_manager.cpp">
+      <Filter>src\login</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\login\login_win.h">
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="src\data_manager.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\login\relogin_manager.h">
+      <Filter>src\login</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

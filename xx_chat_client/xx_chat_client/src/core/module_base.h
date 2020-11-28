@@ -25,7 +25,8 @@ public:
 public:
     void AddObserver(ModuleObserver* observer);
     void RemoveObserver(ModuleObserver* observer);
-    void AsynNotifyObserver(EventId keyId, std::shared_ptr<ImPdu> pdu);
+    void AsynNotifyObserver(EventId eventId, std::shared_ptr<ImPdu> pdu);
+    void AsynNotifyObserver(EventId eventId, void* data, int len);
 
 private:
     std::shared_ptr<ModuleSubject> moduleSubjectSptr_;
