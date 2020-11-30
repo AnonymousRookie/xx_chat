@@ -33,6 +33,8 @@ private:
     void OnFriendList(std::shared_ptr<ImPdu> pdu);
     void OnTcpClientState(void* data, uint32_t len);
 
+    void ClearFriendList();
+
 private:
     Ui::MainWin ui;
     std::vector<QTreeWidgetItem*> treeWidgetItems_;

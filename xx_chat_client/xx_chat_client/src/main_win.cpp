@@ -35,13 +35,7 @@ MainWin::MainWin(QWidget *parent /*= Q_NULLPTR*/)
 
 MainWin::~MainWin()
 {
-    for (auto item : treeWidgetItems_)
-    {
-        if (item) {
-            delete item;
-            item = NULL;
-        }
-    }
+    ClearFriendList();
 }
 
 void MainWin::OnItemDoubleClicked(QTreeWidgetItem* item, int i)
@@ -88,10 +82,16 @@ void MainWin::OnLoginDone(std::shared_ptr<ImPdu> pdu)
     ui.userNameLabel->setText(z::utils::str2qstr(loginRes.user_info().user_name()));
     uint32_t userId = loginRes.user_info().user_id();
     DataManager::GetInstance()->SetCurLoginUserId(userId);
+
+    QPixmap pix = QPixmap(":/status/online");
+    ui.label_status->setPixmap(pix);
+    ui.label_status->setFixedSize(pix.size());
 }
 
 void MainWin::OnFriendList(std::shared_ptr<ImPdu> pdu)
 {
+    ClearFriendList();
+
     im::buddy::AllUserRsp allUserRsp;
     bool ret = allUserRsp.ParseFromArray(pdu->GetBodyData(), pdu->GetBodyLength());
     Z_CHECK(ret);
@@ -100,13 +100,16 @@ void MainWin::OnFriendList(std::shared_ptr<ImPdu> pdu)
     uint32_t userCnt = allUserRsp.user_info_list_size();
     for (uint32_t i = 0; i < userCnt; ++i) {
         auto& userInfo = allUserRsp.user_info_list(i);
-
         DataManager::GetInstance()->AddUserInfo(UserInfo(userInfo.user_id(), userInfo.user_name()));
-
         QTreeWidgetItem* treeWidgetItem = new QTreeWidgetItem(ui.treeWidget_contacts);
         treeWidgetItems_.push_back(treeWidgetItem);
         treeWidgetItem->setText(0, z::utils::str2qstr(userInfo.user_name()));
     }
+}
+
+void MainWin::ClearFriendList()
+{
+    ui.treeWidget_contacts->clear();
 }
 
 void MainWin::OnTcpClientState(void* data, uint32_t len)
@@ -118,6 +121,10 @@ void MainWin::OnTcpClientState(void* data, uint32_t len)
     }
     if (z::core::TcpClientState_DisConnected == state)
     {
+        QPixmap pix = QPixmap(":/status/offline");
+        ui.label_status->setPixmap(pix);
+        ui.label_status->setFixedSize(pix.size());
+
         // 发起重连
         z::login::ReLoginManager::GetInstance()->DoReLogin();
     }

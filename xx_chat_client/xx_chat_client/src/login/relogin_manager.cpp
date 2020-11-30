@@ -44,7 +44,7 @@ void ReLoginManager::DoReLogin()
     if (!timerEvent_) {
         timerEvent_ = std::make_shared<z::core::TimerEvent>();
         timerEvent_->timerEventName_ = "ReLoginManager_DoReLogin_Timer";
-        timerEvent_->interval_ = 2000;
+        timerEvent_->interval_ = 3000;
     }
 
     timerEvent_->callback_ = [&]() {

@@ -66,7 +66,7 @@ public:
 
     void SyncCallback(std::shared_ptr<void> param);
 
-private:
+public:
     OperationDelegate callback_;
 };
 

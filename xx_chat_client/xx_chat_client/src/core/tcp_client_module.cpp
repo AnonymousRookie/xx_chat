@@ -75,6 +75,8 @@ net_handle_t TcpClientModule::DoLogin(const std::string& ip,
         g_client_conn.insert(std::make_pair(handle_, shared_from_this()));
     }
 
+    LOG_INFO("TcpClientModule::DoLogin handle_ = %d", handle_);
+
     return handle_;
 }
 
@@ -110,6 +112,7 @@ void TcpClientModule::Close()
     if (handle_ != NETLIB_INVALID_HANDLE) {
         z::net::netlib_close(handle_);
         g_client_conn.erase(handle_);
+        LOG_INFO("TcpClientModule::Close() g_client_conn.size() = %d, handle_ = %d", g_client_conn.size(), handle_);
     }
 }
 

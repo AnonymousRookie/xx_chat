@@ -17,7 +17,6 @@ LoginOperation::LoginOperation(z::core::OperationDelegate callback, LoginMsgServ
     : CallbackOperation(callback)
     , loginParam_(param)
 {
-
 }
 
 LoginOperation::~LoginOperation()
@@ -34,11 +33,7 @@ void LoginOperation::ProcessOperation()
         loginParam_.msgServerPort,
         loginParam_.username, 
         loginParam_.password,
-        std::bind(&LoginOperation::OnLoginDone, this, std::placeholders::_1));
-}
-
-void LoginOperation::OnLoginDone(std::shared_ptr<void> param)
-{
+        callback_);
 }
 
 NAMESPACE_END(login)

@@ -41,9 +41,6 @@ public:
     virtual void ProcessOperation();
 
 private:
-    void OnLoginDone(std::shared_ptr<void> param);
-
-private:
     LoginMsgServerParam loginParam_;
 };
 

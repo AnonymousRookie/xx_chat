@@ -8,6 +8,11 @@
         <file alias="loading">../images/loading.gif</file>
     </qresource>
 
+    <qresource prefix="status">
+        <file alias="offline">../images/status/imoffline.png</file>
+        <file alias="online">../images/status/imonline.png</file>
+    </qresource>
+
     <qresource prefix="checkbox">
         <file alias="checkbox_hover">../images/checkbox/checkbox_hover.png</file>
         <file alias="checkbox_normal">../images/checkbox/checkbox_normal.png</file>
