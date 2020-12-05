@@ -8,11 +8,6 @@ include_directories(.)
 aux_source_directory(. SRC_LIST_BASE)
 aux_source_directory(${PROJECT_SOURCE_DIR}/../../thirdparty/http HTTP_PARSER)
 
-if(MSVC)
-	# 添加预定义宏
-	add_definitions(-DBUILD_PDU)
-endif()
-
 if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-std=c++11 -g -Wall -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs)
 endif()

@@ -19,11 +19,6 @@
 
 #define DEFAULT_CONCURRENT_DB_COUNT_CNT 10
 
-#ifdef _WIN32
-    #pragma comment(lib, "protobuf-lite.lib")
-    #pragma comment(lib, "ws2_32.lib")
-#endif
-
 // for client connect in
 void msg_serv_callback(uint8_t msg, uint32_t handle)
 {
@@ -37,17 +32,15 @@ void msg_serv_callback(uint8_t msg, uint32_t handle)
 
 int main(int argc, char** argv)
 {
-#ifndef _WIN32
     signal(SIGPIPE, SIG_IGN);
-#endif
 
     std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
 
-    Logger::GetInstance().SetFileBaseName((path + "\\log\\msg_server").c_str());
+    Logger::GetInstance().SetFileBaseName((path + "/log/msg_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader(path + "\\msg_server.json");
+    ConfigFileReader configFileReader(path + "/msg_server.json");
     auto& dom = configFileReader.GetDom();
     
     // 监听client的连接

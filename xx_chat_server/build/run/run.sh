@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ./login_server &
 ./route_server &
 ./db_proxy_server &

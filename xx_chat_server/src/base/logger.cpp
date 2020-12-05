@@ -10,6 +10,7 @@
 #include <ctime>
 #include <cstdarg>
 #include <cstring>
+#include <functional>
 #include "logger.h"
 #include "defines.h"
 

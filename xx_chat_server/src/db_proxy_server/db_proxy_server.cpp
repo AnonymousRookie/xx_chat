@@ -13,12 +13,6 @@
 #include "proxy_conn.h"
 #include "string_util.h"
 
-#ifdef _WIN32
-    #pragma comment(lib, "protobuf-lite.lib")
-    #pragma comment(lib, "ws2_32.lib")
-    #pragma comment(lib, "libmysql.lib")
-#endif
-
 void proxy_serv_callback(uint8_t msg, uint32_t handle)
 {
     if (NETLIB_MSG_CONNECT == msg) {
@@ -32,17 +26,15 @@ void proxy_serv_callback(uint8_t msg, uint32_t handle)
 
 int main(int argc, char** argv)
 {
-#ifndef _WIN32
     signal(SIGPIPE, SIG_IGN);
-#endif
 
     std::string path = z::utils::GetProgramAbsolutePath(argv[0]);
 
-    Logger::GetInstance().SetFileBaseName((path + "\\log\\db_proxy_server").c_str());
+    Logger::GetInstance().SetFileBaseName((path + "/log/db_proxy_server").c_str());
     Logger::GetInstance().SetRollSize(10 * 1024 * 1024);
     Logger::GetInstance().Start();
 
-    ConfigFileReader configFileReader(path + "\\db_proxy_server.json");
+    ConfigFileReader configFileReader(path + "/db_proxy_server.json");
     auto& dom = configFileReader.GetDom();
 
     LOG_INFO(path.c_str());

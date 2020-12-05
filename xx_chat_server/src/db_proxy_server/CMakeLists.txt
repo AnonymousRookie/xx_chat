@@ -14,20 +14,11 @@ endif()
 
 add_executable(${build_target} ${SRC_LIST})
 
-if (MSVC)
-    target_link_libraries(
-        ${build_target}
-        base
-        protobuf-lite
-    )
-else()
-    target_link_libraries(
-        ${build_target}
-        base
-        protobuf-lite
-        mysqlclient
-        pthread
-        dl
-        crypto
-    )
-endif()
+target_link_libraries(
+    ${build_target}
+    base
+    protobuf-lite
+    mysqlclient
+    pthread
+    dl
+)
