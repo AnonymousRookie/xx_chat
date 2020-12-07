@@ -42,6 +42,10 @@ int main(int argc, char** argv)
 
     ConfigFileReader configFileReader(path + "/msg_server.json");
     auto& dom = configFileReader.GetDom();
+    if (!dom.IsObject()) {
+        LOG_ERROR("parser msg_server.json failed!");
+        return -1;
+    }
     
     // 监听client的连接
     auto& msg_server_info = dom["msg_server_info"];

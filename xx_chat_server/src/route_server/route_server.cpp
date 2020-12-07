@@ -36,8 +36,12 @@ int main(int argc, char** argv)
 
     ConfigFileReader configFileReader(path + "/route_server.json");
     auto& dom = configFileReader.GetDom();
-    auto& route_server_info = dom["route_server_info"];
+    if (!dom.IsObject()) {
+        LOG_ERROR("parser route_server.json failed!");
+        return -1;
+    }
 
+    auto& route_server_info = dom["route_server_info"];
     std::string listenIp = route_server_info["listen_ip"].GetString();
     uint16_t listenPort = route_server_info["listen_port"].GetUint();
 

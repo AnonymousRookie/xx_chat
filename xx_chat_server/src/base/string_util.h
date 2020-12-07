@@ -2,7 +2,7 @@
 * Copyright 2018-2019, AnonymousRookie. All rights reserved.
 * https://github.com/AnonymousRookie/xx_chat
 * Author: AnonymousRookie (357688981 at qq dot com)
-* Description: ≥£º˚◊÷∑˚¥Æ¥¶¿Ì∫Ø ˝
+* Description: Â∏∏ËßÅÂ≠óÁ¨¶‰∏≤Â§ÑÁêÜÂáΩÊï∞
 */
 
 #ifndef BASE_SRC_STRING_UTIL_H
@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stdlib.h>
+#include <limits.h>
 #include "defines.h"
 
 NAMESPACE_BEGIN(z)
@@ -35,7 +37,7 @@ std::string numberToString(T num)
     return oss.str();
 }
 
-// Ω´◊÷∑˚¥Æ◊™ªªŒ™–°–¥
+// Â∞ÜÂ≠óÁ¨¶‰∏≤ËΩ¨Êç¢‰∏∫Â∞èÂÜô
 inline std::string strToLower(const std::string& s)
 {
     std::string res(s);
@@ -43,7 +45,7 @@ inline std::string strToLower(const std::string& s)
     return res;
 }
 
-// Ω´◊÷∑˚¥Æ◊™ªªŒ™¥Û–¥
+// Â∞ÜÂ≠óÁ¨¶‰∏≤ËΩ¨Êç¢‰∏∫Â§ßÂÜô
 inline std::string strToUpper(const std::string& s)
 {
     std::string res(s);
@@ -51,7 +53,7 @@ inline std::string strToUpper(const std::string& s)
     return res;
 }
 
-// Ω´◊÷∑˚¥Æstr÷–µƒ◊”¥ÆstrsrcÃÊªª≥…strdst
+// Â∞ÜÂ≠óÁ¨¶‰∏≤str‰∏≠ÁöÑÂ≠ê‰∏≤strsrcÊõøÊç¢Êàêstrdst
 inline void strReplace(std::string& str, const std::string& strsrc, const std::string& strdst)
 {
     std::string::size_type pos = 0;
@@ -63,14 +65,14 @@ inline void strReplace(std::string& str, const std::string& strsrc, const std::s
     }
 }
 
-// ◊÷∑˚¥Æstr «∑Ò¥Ê‘⁄«∞◊∫prefix
+// Â≠óÁ¨¶‰∏≤strÊòØÂê¶Â≠òÂú®ÂâçÁºÄprefix
 inline bool startWithPrefixString(const std::string& str, const std::string& prefix)
 {
     return str.size() >= prefix.size() &&
         str.compare(0, prefix.size(), prefix) == 0;
 }
 
-// ◊÷∑˚¥Æstr «∑Ò¥Ê‘⁄∫Û◊∫suffix
+// Â≠óÁ¨¶‰∏≤strÊòØÂê¶Â≠òÂú®ÂêéÁºÄsuffix
 inline bool endWithSuffixString(const std::string& str, const std::string& suffix)
 {
     return str.size() >= suffix.size() &&
@@ -79,12 +81,14 @@ inline bool endWithSuffixString(const std::string& str, const std::string& suffi
 
 std::string GetProgramAbsolutePath(const std::string& arg)
 {
-    auto pos = arg.find_last_of('\\');
+    char absPathBuff[PATH_MAX];
+    realpath(arg.c_str(), absPathBuff);
+    std::string strAbsPath(absPathBuff);
+    auto pos = strAbsPath.find_last_of('\\');
     if (pos == std::string::npos) {
-        pos = arg.find_last_of('/');
+        pos = strAbsPath.find_last_of('/');
     }
-    std::string path = arg.substr(0, pos);
-    return path;
+    return strAbsPath.substr(0, pos);
 }
 
 NAMESPACE_END(utils)

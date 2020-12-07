@@ -36,8 +36,10 @@ int main(int argc, char** argv)
 
     ConfigFileReader configFileReader(path + "/db_proxy_server.json");
     auto& dom = configFileReader.GetDom();
-
-    LOG_INFO(path.c_str());
+        if (!dom.IsObject()) {
+        LOG_ERROR("parser route_server.json failed!");
+        return -1;
+    }
 
     auto& db_proxy_server = dom["db_proxy_server"];
     std::string listenIp = db_proxy_server["listen_ip"].GetString();

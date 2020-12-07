@@ -23,7 +23,7 @@ void ConfigFileReader::LoadFile(const std::string& filename)
 {
     std::ifstream ifs(filename.c_str());
     if (!ifs) {
-        printf("open %s failed!", filename.c_str());
+        printf("open %s failed!\n", filename.c_str());
         return;
     }
     rapidjson::IStreamWrapper isw(ifs);

@@ -65,7 +65,28 @@ void Logger::Stop()
     if (thread_.joinable()) {
         thread_.join();
     }
-    if (!fp_) {
+    if (fp_) {
+        while (!queue_.empty()) {
+            const std::string& log = queue_.front();
+            if (writtenBytes_ > rollSize_) {
+                fclose(fp_);
+                writtenBytes_ = 0;
+                time_t now = time(NULL);
+                struct tm t;
+                localtime_r(&now, &t);
+                char name[256] = { 0 };
+                sprintf(name, "%s_%04d%02d%02d%02d%02d%02d.log",
+                    fileBaseName_.c_str(),
+                    t.tm_year + 1900, t.tm_mon + 1, t.tm_mday,
+                    t.tm_hour, t.tm_min, t.tm_sec);
+
+                fp_ = fopen(name, "wt+");
+            }
+            fwrite((void*)log.c_str(), log.length(), 1, fp_);
+            fflush(fp_);
+            writtenBytes_ += log.size();
+            queue_.pop_front();
+        }
         fclose(fp_);
         fp_ = nullptr;
     }

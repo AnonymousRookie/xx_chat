@@ -46,16 +46,8 @@ private:
     uint64_t writtenBytes_{ 0 };
 };
 
-
-#ifndef _WIN32
-    #define LOG_INFO(args...) Logger::GetInstance().AddToQueue("INFO", __FILE__, __LINE__, __func__, ##args)
-    #define LOG_WARN(args...) Logger::GetInstance().AddToQueue("WARN", __FILE__, __LINE__, __func__, ##args)
-    #define LOG_ERROR(args...) Logger::GetInstance().AddToQueue("ERROR", __FILE__, __LINE__, __func__, ##args)
-#else
-    #define LOG_INFO(...) Logger::GetInstance().AddToQueue("INFO", __FILE__, __LINE__, __func__, __VA_ARGS__)
-    #define LOG_WARN(...) Logger::GetInstance().AddToQueue("WARN", __FILE__, __LINE__, __func__, __VA_ARGS__)
-    #define LOG_ERROR(...) Logger::GetInstance().AddToQueue("ERROR", __FILE__, __LINE__, __func__, __VA_ARGS__)
-#endif
-
+#define LOG_INFO(args...) Logger::GetInstance().AddToQueue("INFO", __FILE__, __LINE__, __func__, ##args)
+#define LOG_WARN(args...) Logger::GetInstance().AddToQueue("WARN", __FILE__, __LINE__, __func__, ##args)
+#define LOG_ERROR(args...) Logger::GetInstance().AddToQueue("ERROR", __FILE__, __LINE__, __func__, ##args)
 
 #endif  // BASE_LOGGER_H

@@ -31,6 +31,11 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 
+set(CMAKE_BUILD_TYPE "Debug")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
+
 # build libs
 add_subdirectory(base)
 
